@@ -1,11 +1,41 @@
 "use client"
 
+import { useState } from "react"
 import Image from "next/image"
 import { motion } from "framer-motion"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 
 export default function Contact() {
+  const [formData, setFormData] = useState({
+    name: "",
+    email: "",
+    subject: "",
+    message: "",
+  })
+
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault()
+    
+    const { name, email, subject, message } = formData
+    const recipient = "contact.sobersense@gmail.com"
+    const emailSubject = encodeURIComponent(subject || "Contact Form Submission")
+    const emailBody = encodeURIComponent(
+      `Name: ${name}\nEmail: ${email}\n\nMessage:\n${message}`
+    )
+    
+    window.location.href = `mailto:${recipient}?subject=${emailSubject}&body=${emailBody}`
+  }
+
+  const handleChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => {
+    setFormData({
+      ...formData,
+      [e.target.id]: e.target.value,
+    })
+  }
+
   return (
     <main className="min-h-screen">
       {/* Hero Section */}
@@ -54,7 +84,7 @@ export default function Contact() {
                 </CardDescription>
               </CardHeader>
               <CardContent>
-                <form className="space-y-6">
+                <form onSubmit={handleSubmit} className="space-y-6">
                   <div className="space-y-2">
                     <label
                       htmlFor="name"
@@ -66,6 +96,9 @@ export default function Contact() {
                       id="name"
                       type="text"
                       placeholder="Your name"
+                      value={formData.name}
+                      onChange={handleChange}
+                      required
                       className="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
                     />
                   </div>
@@ -80,6 +113,9 @@ export default function Contact() {
                       id="email"
                       type="email"
                       placeholder="your.email@example.com"
+                      value={formData.email}
+                      onChange={handleChange}
+                      required
                       className="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
                     />
                   </div>
@@ -94,6 +130,8 @@ export default function Contact() {
                       id="subject"
                       type="text"
                       placeholder="Subject"
+                      value={formData.subject}
+                      onChange={handleChange}
                       className="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
                     />
                   </div>
@@ -108,6 +146,9 @@ export default function Contact() {
                       id="message"
                       rows={6}
                       placeholder="Your message"
+                      value={formData.message}
+                      onChange={handleChange}
+                      required
                       className="flex min-h-[80px] w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
                     />
                   </div>
@@ -162,9 +203,12 @@ export default function Contact() {
                   <CardTitle>Email</CardTitle>
                 </CardHeader>
                 <CardContent>
-                  <p className="text-muted-foreground">
-                    contact@unitedagainstuse.org
-                  </p>
+                  <a
+                    href="mailto:contact.sobersense@gmail.com"
+                    className="text-muted-foreground hover:text-primary transition-colors"
+                  >
+                    contact.sobersense@gmail.com
+                  </a>
                 </CardContent>
               </Card>
 

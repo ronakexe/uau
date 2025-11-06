@@ -69,49 +69,43 @@ export default function Timeline() {
       {/* Timeline Section */}
       <section className="container py-20 px-4">
         <div className="relative">
-          {/* Timeline Line */}
-          <div className="absolute left-8 top-0 h-full w-0.5 bg-primary/20 md:left-1/2 md:-translate-x-1/2" />
+          {/* Timeline Line - Far Left */}
+          <div className="absolute left-8 top-0 h-full w-0.5 bg-primary/30" />
 
-          <div className="space-y-12">
+          <div className="space-y-16 pl-20 md:pl-24">
             {timelineEvents.map((event, index) => (
               <motion.div
                 key={event.year}
-                initial={{ opacity: 0, x: index % 2 === 0 ? -50 : 50 }}
+                initial={{ opacity: 0, x: -50 }}
                 whileInView={{ opacity: 1, x: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.6, delay: index * 0.1 }}
-                className="relative flex items-center gap-8 md:gap-12"
+                className="relative"
               >
-                {/* Timeline Dot */}
-                <div className="relative z-10 flex h-16 w-16 shrink-0 items-center justify-center rounded-full border-4 border-background bg-primary shadow-lg md:absolute md:left-1/2 md:-translate-x-1/2">
+                {/* Timeline Dot - Far Left */}
+                <div className="absolute -left-[3.5rem] top-6 z-10 flex h-8 w-8 shrink-0 items-center justify-center rounded-full border-4 border-background bg-primary shadow-lg md:-left-[4.5rem] md:h-10 md:w-10">
                   <div className="h-3 w-3 rounded-full bg-primary" />
                 </div>
 
-                {/* Content */}
-                <div
-                  className={`flex-1 ${
-                    index % 2 === 0
-                      ? "md:pr-[calc(50%+4rem)] md:text-right"
-                      : "md:pl-[calc(50%+4rem)]"
-                  }`}
-                >
-                  <div className="rounded-lg border bg-card p-6 shadow-sm transition-shadow hover:shadow-md">
-                    <div className="mb-4 h-48 w-full overflow-hidden rounded-lg">
+                {/* Content - Left Aligned Rectangle */}
+                <div className="w-full max-w-4xl">
+                  <div className="rounded-lg border bg-card p-8 shadow-sm transition-all duration-300 hover:shadow-lg md:p-12">
+                    <div className="mb-6 h-64 w-full overflow-hidden rounded-lg md:h-80">
                       <Image
-                        src={`https://placehold.co/600x400/800000/ffffff?text=${event.year}`}
+                        src={`https://placehold.co/800x600/800000/ffffff?text=${event.year}`}
                         alt={`${event.year} placeholder`}
-                        width={600}
-                        height={400}
+                        width={800}
+                        height={600}
                         className="h-full w-full object-cover"
                       />
                     </div>
-                    <div className="mb-2 text-2xl font-bold text-primary">
+                    <div className="mb-4 text-3xl font-bold text-primary md:text-4xl">
                       {event.year}
                     </div>
-                    <h3 className="mb-3 text-2xl font-semibold">
+                    <h3 className="mb-4 text-3xl font-semibold md:text-4xl">
                       {event.title}
                     </h3>
-                    <p className="text-muted-foreground">
+                    <p className="text-lg leading-relaxed text-muted-foreground md:text-xl">
                       {event.description}
                     </p>
                   </div>
