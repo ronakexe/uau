@@ -37,9 +37,8 @@ export default function Home() {
             transition={{ delay: 0.6, duration: 0.6 }}
             className="mx-auto mb-12 max-w-2xl text-lg leading-relaxed text-muted-foreground"
           >
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do
-            eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim
-            ad minim veniam, quis nostrud exercitation ullamco laboris.
+            United Against Use is dedicated to preventing the leading cause of death in teenagers, substance use.
+            We believe every life is precious and no one should lose it to alcohol.
           </motion.p>
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -51,7 +50,7 @@ export default function Home() {
               Learn More
             </Button>
             <Button size="lg" variant="outline" className="hover:scale-105 transition-transform">
-              Get Involved
+              Contact Us
             </Button>
           </motion.div>
         </motion.div>
