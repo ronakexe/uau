@@ -92,17 +92,17 @@ export default function Home() {
             {
               title: "Prevention Education",
               description: "We beilive most teenagers already know the risks of substance abuse, but don't always know how to avoid it. We want to fix this by helping them navigate peer pressure or other coping mechanisms rather than turning to substance use.",
-              image: "Prevention+Education"
+              image: "/images/preventioneducation.jpg"
             },
             {
               title: "Parent & Community Engagement",
               description: "We want to work with parents and educators to help them recognize warning signs of substance use in teenagers and how to communicate with them about it. ",
-              image: "Parent+Community"
+              image: "/images/Parentengagement.jpg"
             },
             {
               title: "Policy Advocacy",
               description: "We want to push for stricter enforcement of underage drinking laws. This looks like increasing penalties for selling alcohol to minors/knowingly allow teenagers to drink it and stricter advertisment laws.",
-              image: "Policy+Advocacy"
+              image: "/images/policyadvocacy.jpg"
             }
           ].map((feature, index) => (
             <motion.div
@@ -115,8 +115,8 @@ export default function Home() {
             >
               <div className="relative mb-4 h-64 w-full overflow-hidden rounded-lg">
                 <Image
-                  src={`https://placehold.co/600x400/800000/ffffff?text=${feature.image}`}
-                  alt={`${feature.title} placeholder`}
+                  src={feature.image}
+                  alt={feature.title}
                   fill
                   className="object-cover transition-transform duration-300 group-hover:scale-110"
                 />
