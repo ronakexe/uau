@@ -1,6 +1,7 @@
 "use client"
 
 import Image from "next/image"
+import Link from "next/link"
 import { motion } from "framer-motion"
 import { Button } from "@/components/ui/button"
 
@@ -46,12 +47,16 @@ export default function Home() {
             transition={{ delay: 0.8, duration: 0.6 }}
             className="flex justify-center gap-4"
           >
-            <Button size="lg" className="hover:scale-105 transition-transform">
-              Learn More
-            </Button>
-            <Button size="lg" variant="outline" className="hover:scale-105 transition-transform">
-              Contact Us
-            </Button>
+            <Link href="/about">
+              <Button size="lg" className="hover:scale-105 transition-transform">
+                Learn More
+              </Button>
+            </Link>
+            <Link href="/contact">
+              <Button size="lg" variant="outline" className="hover:scale-105 transition-transform">
+                Contact Us
+              </Button>
+            </Link>
           </motion.div>
         </motion.div>
         <motion.div

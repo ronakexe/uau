@@ -5,34 +5,35 @@ import { motion } from "framer-motion"
 
 const timelineEvents = [
   {
-    year: "2024",
+    date: "January 15, 2024",
     title: "Foundation",
     description:
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+      "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+    image: "https://placehold.co/800x600/800000/ffffff?text=Foundation",
   },
   {
-    year: "2023",
+    date: "March 22, 2023",
     title: "Major Milestone",
     description:
-      "Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
+      "Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris.",
   },
   {
-    year: "2022",
+    date: "June 10, 2022",
     title: "Expansion",
     description:
-      "Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.",
+      "Duis aute irure dolor in reprehenderit in voluptate velit esse.",
   },
   {
-    year: "2021",
+    date: "September 5, 2021",
     title: "Initial Launch",
     description:
-      "Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+      "Excepteur sint occaecat cupidatat non proident, sunt in culpa.",
   },
   {
-    year: "2020",
+    date: "November 18, 2020",
     title: "Concept Development",
     description:
-      "Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium.",
+      "Sed ut perspiciatis unde omnis iste natus error sit voluptatem.",
   },
 ]
 
@@ -75,7 +76,7 @@ export default function Timeline() {
           <div className="space-y-16 pl-20 md:pl-24">
             {timelineEvents.map((event, index) => (
               <motion.div
-                key={event.year}
+                key={event.title}
                 initial={{ opacity: 0, x: -50 }}
                 whileInView={{ opacity: 1, x: 0 }}
                 viewport={{ once: true }}
@@ -90,22 +91,24 @@ export default function Timeline() {
                 {/* Content - Left Aligned Rectangle */}
                 <div className="w-full max-w-4xl">
                   <div className="rounded-lg border bg-card p-8 shadow-sm transition-all duration-300 hover:shadow-lg md:p-12">
-                    <div className="mb-6 h-64 w-full overflow-hidden rounded-lg md:h-80">
-                      <Image
-                        src={`https://placehold.co/800x600/800000/ffffff?text=${event.year}`}
-                        alt={`${event.year} placeholder`}
-                        width={800}
-                        height={600}
-                        className="h-full w-full object-cover"
-                      />
-                    </div>
-                    <div className="mb-4 text-3xl font-bold text-primary md:text-4xl">
-                      {event.year}
-                    </div>
-                    <h3 className="mb-4 text-3xl font-semibold md:text-4xl">
+                    {event.image && (
+                      <div className="mb-6 h-64 w-full overflow-hidden rounded-lg md:h-80">
+                        <Image
+                          src={event.image}
+                          alt={event.title}
+                          width={800}
+                          height={600}
+                          className="h-full w-full object-cover"
+                        />
+                      </div>
+                    )}
+                    <h3 className="mb-2 text-3xl font-bold text-red-600 md:text-4xl">
                       {event.title}
                     </h3>
-                    <p className="text-lg leading-relaxed text-muted-foreground md:text-xl">
+                    <div className="mb-4 text-lg text-muted-foreground md:text-xl">
+                      {event.date}
+                    </div>
+                    <p className="text-base leading-relaxed text-muted-foreground md:text-lg">
                       {event.description}
                     </p>
                   </div>

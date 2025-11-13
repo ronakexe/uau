@@ -1,7 +1,6 @@
 "use client"
 
 import { useState } from "react"
-import Image from "next/image"
 import { motion } from "framer-motion"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
@@ -13,18 +12,54 @@ export default function Contact() {
     subject: "",
     message: "",
   })
+  const [isSubmitting, setIsSubmitting] = useState(false)
+  const [submitStatus, setSubmitStatus] = useState<{
+    type: "success" | "error" | null
+    message: string
+  }>({ type: null, message: "" })
 
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
-    
-    const { name, email, subject, message } = formData
-    const recipient = "contact.sobersense@gmail.com"
-    const emailSubject = encodeURIComponent(subject || "Contact Form Submission")
-    const emailBody = encodeURIComponent(
-      `Name: ${name}\nEmail: ${email}\n\nMessage:\n${message}`
-    )
-    
-    window.location.href = `mailto:${recipient}?subject=${emailSubject}&body=${emailBody}`
+    setIsSubmitting(true)
+    setSubmitStatus({ type: null, message: "" })
+
+    try {
+      const response = await fetch("/api/contact", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(formData),
+      })
+
+      const data = await response.json()
+
+      if (response.ok) {
+        setSubmitStatus({
+          type: "success",
+          message: "Message sent successfully! We'll get back to you soon.",
+        })
+        // Reset form
+        setFormData({
+          name: "",
+          email: "",
+          subject: "",
+          message: "",
+        })
+      } else {
+        setSubmitStatus({
+          type: "error",
+          message: data.error || "Failed to send message. Please try again.",
+        })
+      }
+    } catch (error) {
+      setSubmitStatus({
+        type: "error",
+        message: "Failed to send message. Please try again.",
+      })
+    } finally {
+      setIsSubmitting(false)
+    }
   }
 
   const handleChange = (
@@ -67,11 +102,11 @@ export default function Contact() {
 
       {/* Contact Section */}
       <section className="container py-20 px-4">
-        <div className="grid gap-12 lg:grid-cols-2">
+        <div className="mx-auto max-w-2xl">
           {/* Contact Form */}
           <motion.div
-            initial={{ opacity: 0, x: -30 }}
-            whileInView={{ opacity: 1, x: 0 }}
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6 }}
           >
@@ -79,12 +114,22 @@ export default function Contact() {
               <CardHeader>
                 <CardTitle className="text-3xl">Send Us a Message</CardTitle>
                 <CardDescription>
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed
-                  do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                  We'd love to hear from you. Send us a message and we'll respond as soon as possible.
                 </CardDescription>
               </CardHeader>
               <CardContent>
                 <form onSubmit={handleSubmit} className="space-y-6">
+                  {submitStatus.type && (
+                    <div
+                      className={`rounded-md p-4 ${
+                        submitStatus.type === "success"
+                          ? "bg-green-50 text-green-800 dark:bg-green-900/20 dark:text-green-400"
+                          : "bg-red-50 text-red-800 dark:bg-red-900/20 dark:text-red-400"
+                      }`}
+                    >
+                      {submitStatus.message}
+                    </div>
+                  )}
                   <div className="space-y-2">
                     <label
                       htmlFor="name"
@@ -99,6 +144,7 @@ export default function Contact() {
                       value={formData.name}
                       onChange={handleChange}
                       required
+                      disabled={isSubmitting}
                       className="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
                     />
                   </div>
@@ -116,6 +162,7 @@ export default function Contact() {
                       value={formData.email}
                       onChange={handleChange}
                       required
+                      disabled={isSubmitting}
                       className="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
                     />
                   </div>
@@ -132,6 +179,7 @@ export default function Contact() {
                       placeholder="Subject"
                       value={formData.subject}
                       onChange={handleChange}
+                      disabled={isSubmitting}
                       className="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
                     />
                   </div>
@@ -149,87 +197,21 @@ export default function Contact() {
                       value={formData.message}
                       onChange={handleChange}
                       required
+                      disabled={isSubmitting}
                       className="flex min-h-[80px] w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
                     />
                   </div>
                   <Button
                     type="submit"
                     size="lg"
-                    className="w-full hover:scale-105 transition-transform"
+                    disabled={isSubmitting}
+                    className="w-full hover:scale-105 transition-transform disabled:opacity-50 disabled:cursor-not-allowed"
                   >
-                    Send Message
+                    {isSubmitting ? "Sending..." : "Send Message"}
                   </Button>
                 </form>
               </CardContent>
             </Card>
-          </motion.div>
-
-          {/* Contact Information */}
-          <motion.div
-            initial={{ opacity: 0, x: 30 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
-            className="space-y-8"
-          >
-            <div>
-              <h2 className="mb-6 text-3xl font-bold">Contact Information</h2>
-              <p className="mb-6 text-lg leading-relaxed text-muted-foreground">
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do
-                eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
-                enim ad minim veniam, quis nostrud exercitation ullamco laboris
-                nisi ut aliquip ex ea commodo consequat.
-              </p>
-            </div>
-
-            <div className="space-y-6">
-              <Card className="transition-shadow hover:shadow-md">
-                <CardHeader>
-                  <CardTitle>Address</CardTitle>
-                </CardHeader>
-                <CardContent>
-                  <p className="text-muted-foreground">
-                    Lorem ipsum dolor sit amet
-                    <br />
-                    Consectetur adipiscing elit
-                    <br />
-                    City, State 12345
-                  </p>
-                </CardContent>
-              </Card>
-
-              <Card className="transition-shadow hover:shadow-md">
-                <CardHeader>
-                  <CardTitle>Email</CardTitle>
-                </CardHeader>
-                <CardContent>
-                  <a
-                    href="mailto:contact.sobersense@gmail.com"
-                    className="text-muted-foreground hover:text-primary transition-colors"
-                  >
-                    contact.sobersense@gmail.com
-                  </a>
-                </CardContent>
-              </Card>
-
-              <Card className="transition-shadow hover:shadow-md">
-                <CardHeader>
-                  <CardTitle>Phone</CardTitle>
-                </CardHeader>
-                <CardContent>
-                  <p className="text-muted-foreground">+1 (555) 123-4567</p>
-                </CardContent>
-              </Card>
-            </div>
-
-            <div className="relative h-64 w-full overflow-hidden rounded-lg">
-              <Image
-                src="https://placehold.co/800x600/800000/ffffff?text=Contact+Location"
-                alt="Contact location placeholder"
-                fill
-                className="object-cover"
-              />
-            </div>
           </motion.div>
         </div>
       </section>
