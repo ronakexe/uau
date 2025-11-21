@@ -44,8 +44,8 @@ export default function About() {
             className="relative h-[400px] w-full overflow-hidden rounded-lg"
           >
             <Image
-              src="images/randr.jpg"
-              alt="About us placeholder"
+              src="/images/randr.jpg"
+              alt="About us"
               fill
               className="object-cover"
             />
