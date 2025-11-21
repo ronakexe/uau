@@ -3,26 +3,12 @@
 import Image from "next/image"
 import { motion } from "framer-motion"
 
-const timelineEvents = [
-  {
-    date: "January 15, 2024",
-    title: "Foundation",
-    description:
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
-    image: "https://placehold.co/800x600/800000/ffffff?text=Foundation",
-  },
-  {
-    date: "March 22, 2023",
-    title: "Major Milestone",
-    description:
-      "Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris.",
-  },
-  {
-    date: "June 10, 2022",
-    title: "Expansion",
-    description:
-      "Duis aute irure dolor in reprehenderit in voluptate velit esse.",
-  },
+const timelineEvents: Array<{
+  date: string
+  title: string
+  description: string
+  image?: string
+}> = [
   {
     date: "September 5, 2021",
     title: "Initial Launch",
@@ -30,10 +16,10 @@ const timelineEvents = [
       "Excepteur sint occaecat cupidatat non proident, sunt in culpa.",
   },
   {
-    date: "November 18, 2020",
-    title: "Concept Development",
+    date: "January 28th, 2024",
+    title: "Initial Idea",
     description:
-      "Sed ut perspiciatis unde omnis iste natus error sit voluptatem.",
+      "This was the day we came up with",
   },
 ]
 

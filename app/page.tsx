@@ -96,7 +96,7 @@ export default function Home() {
           {[
             {
               title: "Prevention Education",
-              description: "We beilive most teenagers already know the risks of substance abuse, but don't always know how to avoid it. We want to fix this by helping them navigate peer pressure or other coping mechanisms rather than turning to substance use.",
+              description: "We believe most teenagers already know the risks of substance abuse, but don't always know how to avoid it. We want to fix this by helping them navigate peer pressure & other coping mechanisms rather than turning to substance use.",
               image: "/images/preventioneducation.jpg"
             },
             {
