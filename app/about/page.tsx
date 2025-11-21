@@ -44,7 +44,7 @@ export default function About() {
             className="relative h-[400px] w-full overflow-hidden rounded-lg"
           >
             <Image
-              src="https://placehold.co/800x600/800000/ffffff?text=About+Us+Image"
+              src="images/randr.jpg"
               alt="About us placeholder"
               fill
               className="object-cover"
@@ -60,23 +60,22 @@ export default function About() {
           >
             <h2 className="mb-6 text-4xl font-bold">Who We Are</h2>
             <p className="mb-4 text-lg leading-relaxed text-muted-foreground">
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do
-              eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
-              enim ad minim veniam, quis nostrud exercitation ullamco laboris
-              nisi ut aliquip ex ea commodo consequat.
+              Ronak Ramnani and Rahul Singhal are highschool innovators who 
+              are dedicated to ending substance use in teenagers. Inspired
+               after their late friend, they belive that no one should ever 
+               have to lose their life to alcohol. 
             </p>
             <p className="mb-4 text-lg leading-relaxed text-muted-foreground">
-              Duis aute irure dolor in reprehenderit in voluptate velit esse
-              cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat
-              cupidatat non proident, sunt in culpa qui officia deserunt
-              mollit anim id est laborum.
+            Born in New York City, raised in Oregon, and living in Dallas, 
+            Ronak Ramnani is a Sophomore at Greenhill School who is
+             passionate about A.I., business, and design. He's a member of 
+             the Greenhill Debate Team and has led film productions through 
+             his school's video production program.
             </p>
             <p className="text-lg leading-relaxed text-muted-foreground">
-              Sed ut perspiciatis unde omnis iste natus error sit voluptatem
-              accusantium doloremque laudantium, totam rem aperiam, eaque ipsa
-              quae ab illo inventore veritatis et quasi architecto beatae
-              vitae dicta sunt explicabo.
-            </p>
+            Rahul Singhal is a Junior at Greenhill School who is 
+            interested in business and engineering. 
+            </p>  
           </motion.div>
         </div>
       </section>
