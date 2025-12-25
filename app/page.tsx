@@ -59,22 +59,6 @@ export default function Home() {
             </Link>
           </motion.div>
         </motion.div>
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 1, duration: 1 }}
-          className="absolute inset-0 -z-0"
-        >
-          <div className="relative h-full w-full">
-            <Image
-              src="https://placehold.co/1920x1080/800000/ffffff?text=Hero+Image"
-              alt="Hero placeholder"
-              fill
-              className="object-cover opacity-20"
-              priority
-            />
-          </div>
-        </motion.div>
       </section>
 
       {/* Features Section */}

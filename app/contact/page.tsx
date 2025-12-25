@@ -74,12 +74,12 @@ export default function Contact() {
   return (
     <main className="min-h-screen">
       {/* Hero Section */}
-      <section className="relative flex min-h-[60vh] items-center justify-center overflow-hidden bg-gradient-to-b from-background to-muted/20">
+      <section className="relative flex min-h-[30vh] items-center justify-center overflow-hidden bg-gradient-to-b from-background to-muted/20">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8 }}
-          className="container relative z-10 px-4 py-20 text-center"
+          className="container relative z-10 px-4 py-12 text-center"
         >
           <motion.h1
             initial={{ opacity: 0, y: 20 }}
@@ -89,14 +89,6 @@ export default function Contact() {
           >
             Contact Us
           </motion.h1>
-          <motion.p
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.4, duration: 0.6 }}
-            className="text-xl text-muted-foreground md:text-2xl"
-          >
-            Get in Touch
-          </motion.p>
         </motion.div>
       </section>
 
