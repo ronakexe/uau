@@ -1,4 +1,4 @@
-import { Variants } from "framer-motion"
+import { Variants, Transition } from "framer-motion"
 
 /**
  * Reusable Framer Motion animation configurations
@@ -42,8 +42,8 @@ export const fadeVariants: Variants = {
 }
 
 // Slide transition configuration
-export const slideTransition = {
-  x: { type: "spring", stiffness: 300, damping: 30 },
+export const slideTransition: Transition = {
+  x: { type: "spring" as const, stiffness: 300, damping: 30 },
   opacity: { duration: 0.3 },
   scale: { duration: 0.3 },
 }
