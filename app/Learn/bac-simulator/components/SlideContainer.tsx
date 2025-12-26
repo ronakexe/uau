@@ -4,7 +4,7 @@ import { motion, AnimatePresence } from "framer-motion"
 import { ChevronLeft, ChevronRight } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { ProgressIndicator } from "./ProgressIndicator"
-import { slideVariants, slideTransition } from "../utils/animations"
+import { slideVariants } from "../utils/animations"
 
 interface SlideContainerProps {
   children: React.ReactNode
@@ -76,7 +76,6 @@ export function SlideContainer({
           initial="enter"
           animate="center"
           exit="exit"
-          transition={slideTransition}
           className="w-full"
           role="region"
           aria-label={`Slide ${currentSlide + 1} of ${totalSlides}`}

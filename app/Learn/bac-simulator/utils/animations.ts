@@ -1,27 +1,40 @@
-import { Variants, Transition } from "framer-motion"
+import { Variants } from "framer-motion"
 
 /**
  * Reusable Framer Motion animation configurations
  */
 
-// Slide transition variants
+// Slide transition variants with transitions embedded
+// This approach avoids TypeScript issues by defining transitions within variants
 export const slideVariants: Variants = {
   enter: (direction: number) => ({
     x: direction > 0 ? 1000 : -1000,
     opacity: 0,
     scale: 0.95,
+    transition: {
+      duration: 0.4,
+      ease: [0.4, 0, 0.2, 1], // cubic-bezier for smooth animation
+    },
   }),
   center: {
     zIndex: 1,
     x: 0,
     opacity: 1,
     scale: 1,
+    transition: {
+      duration: 0.4,
+      ease: [0.4, 0, 0.2, 1],
+    },
   },
   exit: (direction: number) => ({
     zIndex: 0,
     x: direction < 0 ? 1000 : -1000,
     opacity: 0,
     scale: 0.95,
+    transition: {
+      duration: 0.4,
+      ease: [0.4, 0, 0.2, 1],
+    },
   }),
 }
 
@@ -41,11 +54,12 @@ export const fadeVariants: Variants = {
   },
 }
 
-// Slide transition configuration
-export const slideTransition: Transition = {
-  x: { type: "spring" as const, stiffness: 300, damping: 30 },
-  opacity: { duration: 0.3 },
-  scale: { duration: 0.3 },
+// Slide transition configuration - kept for backward compatibility
+// Note: Transitions are now embedded in slideVariants for better type safety
+// This can be used as a fallback or for components that don't use variants
+export const slideTransition = {
+  duration: 0.4,
+  ease: [0.4, 0, 0.2, 1] as const, // cubic-bezier for smooth animation
 }
 
 // Fade transition configuration
