@@ -18,9 +18,9 @@ export function BACCalculator() {
     clearDrinks,
   } = useBACContext()
 
-  const weightTimeoutRef = useRef<NodeJS.Timeout>()
-  const drinksTimeoutRef = useRef<NodeJS.Timeout>()
-  const hoursTimeoutRef = useRef<NodeJS.Timeout>()
+  const weightTimeoutRef = useRef<ReturnType<typeof setTimeout> | undefined>(undefined)
+  const drinksTimeoutRef = useRef<ReturnType<typeof setTimeout> | undefined>(undefined)
+  const hoursTimeoutRef = useRef<ReturnType<typeof setTimeout> | undefined>(undefined)
 
   // Debounced update functions
   const debouncedUpdateWeight = useCallback(
