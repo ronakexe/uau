@@ -38,21 +38,17 @@ export function Slide3_CalculatorIntro() {
   return (
     <div className="container mx-auto min-h-screen px-4 py-20">
       <div className="mx-auto max-w-4xl">
-        <h1 className="mb-8 text-center text-4xl font-bold md:text-5xl animate-fade-in-up">
+        <h1 className="mb-8 text-center text-4xl font-bold md:text-5xl">
           Interactive Calculator Setup
         </h1>
-        <p className="mb-12 text-center text-lg text-muted-foreground md:text-xl animate-fade-in-up" style={{ animationDelay: "0.1s" }}>
+        <p className="mb-12 text-center text-lg text-muted-foreground md:text-xl">
           Learn how to use the BAC calculator step by step
         </p>
 
         {/* Steps */}
         <div className="mb-12 space-y-6">
-          {steps.map((step, index) => (
-            <div
-              key={step.number}
-              className="flex gap-4 rounded-lg border bg-card p-6 animate-fade-in-up"
-              style={{ animationDelay: `${0.2 + index * 0.1}s` }}
-            >
+          {steps.map((step) => (
+            <div key={step.number} className="flex gap-4 rounded-lg border bg-card p-6">
               <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-primary text-lg font-bold text-primary-foreground">
                 {step.number}
               </div>
@@ -65,7 +61,7 @@ export function Slide3_CalculatorIntro() {
         </div>
 
         {/* Example Calculation */}
-        <div className="rounded-lg border bg-muted/20 p-6 animate-fade-in-up" style={{ animationDelay: "0.6s" }}>
+        <div className="rounded-lg border bg-muted/20 p-6">
           <h2 className="mb-4 text-2xl font-semibold">Example Calculation</h2>
           <div className="space-y-2 font-mono">
             <p>

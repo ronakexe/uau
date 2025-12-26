@@ -86,7 +86,7 @@ export function ReactionTimeVisual({ bac }: ReactionTimeVisualProps) {
         {showTarget && (
           <button
             onClick={handleTargetClick}
-            className="h-24 w-24 rounded-full bg-red-500 shadow-lg transition-all hover:scale-110 animate-scale-in"
+            className="h-24 w-24 rounded-full bg-red-500 shadow-lg transition-all hover:scale-110"
             aria-label="Click target as fast as possible"
           />
         )}

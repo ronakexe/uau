@@ -54,7 +54,7 @@ export function BACDisplay({
         <div className="relative">
           <div
             key={currentBAC}
-            className="text-6xl font-mono font-bold md:text-7xl animate-scale-in"
+            className="text-6xl font-mono font-bold md:text-7xl transition-colors duration-300"
             style={{ color: getGaugeColor() }}
           >
             {animatedBAC.toFixed(3)}%
@@ -80,7 +80,7 @@ export function BACDisplay({
 
         {/* Legal Limit Warning */}
         {isAboveLegal && (
-          <div className="flex items-center gap-2 rounded-lg bg-destructive/10 p-3 text-destructive animate-scale-in">
+          <div className="flex items-center gap-2 rounded-lg bg-destructive/10 p-3 text-destructive">
             <AlertTriangle className="h-5 w-5" />
             <span className="font-semibold">ABOVE LEGAL DRIVING LIMIT (0.08%)</span>
           </div>

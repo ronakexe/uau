@@ -27,21 +27,17 @@ export function Slide1_Education() {
   return (
     <div className="container mx-auto min-h-screen px-4 py-20">
       <div className="mx-auto max-w-4xl">
-        <h1 className="mb-8 text-center text-4xl font-bold md:text-5xl animate-fade-in-up">
+        <h1 className="mb-8 text-center text-4xl font-bold md:text-5xl">
           What is BAC?
         </h1>
 
-        <p className="mb-12 text-center text-lg text-muted-foreground md:text-xl animate-fade-in-up" style={{ animationDelay: "0.1s" }}>
+        <p className="mb-12 text-center text-lg text-muted-foreground md:text-xl">
           Blood Alcohol Concentration measures how much alcohol is in your bloodstream
         </p>
 
         <div className="grid gap-6 md:grid-cols-2">
           {facts.map((fact, index) => (
-            <div
-              key={index}
-              className="rounded-lg border bg-card p-6 animate-fade-in-up"
-              style={{ animationDelay: `${0.2 + index * 0.1}s` }}
-            >
+            <div key={index} className="rounded-lg border bg-card p-6">
               <h3 className="mb-3 text-xl font-semibold">{fact.title}</h3>
               <p className="text-muted-foreground">{fact.content}</p>
             </div>
@@ -49,10 +45,7 @@ export function Slide1_Education() {
         </div>
 
         {/* Visual explanation */}
-        <div
-          className="mt-12 rounded-lg border bg-muted/20 p-6 animate-fade-in-up"
-          style={{ animationDelay: "0.6s" }}
-        >
+        <div className="mt-12 rounded-lg border bg-muted/20 p-6">
           <h3 className="mb-4 text-xl font-semibold">Visual Example</h3>
           <p className="mb-4 text-muted-foreground">
             At 0.08% BAC (legal driving limit in most states):

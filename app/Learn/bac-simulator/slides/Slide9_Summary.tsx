@@ -22,12 +22,12 @@ export function Slide9_Summary() {
   return (
     <div className="container mx-auto min-h-screen px-4 py-20">
       <div className="mx-auto max-w-4xl">
-        <h1 className="mb-8 text-center text-4xl font-bold md:text-5xl animate-fade-in-up">
+        <h1 className="mb-8 text-center text-4xl font-bold md:text-5xl">
           Key Takeaways
         </h1>
 
         {/* Main Takeaways */}
-        <div className="mb-12 rounded-lg border bg-card p-6 animate-fade-in-up" style={{ animationDelay: "0.1s" }}>
+        <div className="mb-12 rounded-lg border bg-card p-6">
           <h2 className="mb-4 text-2xl font-semibold">What You've Learned</h2>
           <ul className="space-y-3">
             {takeaways.map((takeaway, index) => (
@@ -40,7 +40,7 @@ export function Slide9_Summary() {
         </div>
 
         {/* Prevention Strategies */}
-        <div className="mb-12 rounded-lg border bg-primary/5 p-6 animate-fade-in-up" style={{ animationDelay: "0.2s" }}>
+        <div className="mb-12 rounded-lg border bg-primary/5 p-6">
           <h2 className="mb-4 text-2xl font-semibold">Prevention Strategies</h2>
           <ul className="space-y-3">
             {prevention.map((strategy, index) => (
@@ -53,7 +53,7 @@ export function Slide9_Summary() {
         </div>
 
         {/* Call to Action */}
-        <div className="rounded-lg border-l-4 border-primary bg-primary/10 p-6 animate-fade-in-up" style={{ animationDelay: "0.3s" }}>
+        <div className="rounded-lg border-l-4 border-primary bg-primary/10 p-6">
           <p className="text-center text-lg font-semibold">
             Think before you drink. Plan for safe transportation.
           </p>

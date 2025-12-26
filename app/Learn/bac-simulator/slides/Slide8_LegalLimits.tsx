@@ -49,18 +49,14 @@ export function Slide8_LegalLimits() {
   return (
     <div className="container mx-auto min-h-screen px-4 py-20">
       <div className="mx-auto max-w-4xl">
-        <h1 className="mb-8 text-center text-4xl font-bold md:text-5xl animate-fade-in-up">
+        <h1 className="mb-8 text-center text-4xl font-bold md:text-5xl">
           Legal Limits & Consequences
         </h1>
 
         {/* Legal Thresholds */}
         <div className="mb-12 space-y-6">
           {thresholds.map((threshold, index) => (
-            <div
-              key={index}
-              className="rounded-lg border bg-card p-6 animate-fade-in-up"
-              style={{ animationDelay: `${0.1 + index * 0.1}s` }}
-            >
+            <div key={index} className="rounded-lg border bg-card p-6">
               <div className="mb-2 flex items-center gap-4">
                 <div className={`text-3xl font-bold ${threshold.color}`}>
                   {threshold.bac.toFixed(2)}%
@@ -73,7 +69,7 @@ export function Slide8_LegalLimits() {
         </div>
 
         {/* Non-Legal Consequences */}
-        <div className="mb-12 rounded-lg border bg-card p-6 animate-fade-in-up" style={{ animationDelay: "0.4s" }}>
+        <div className="mb-12 rounded-lg border bg-card p-6">
           <h2 className="mb-4 text-2xl font-semibold">Beyond Legal Consequences</h2>
           <div className="grid gap-4 md:grid-cols-2">
             <div>
@@ -98,7 +94,7 @@ export function Slide8_LegalLimits() {
         </div>
 
         {/* Myth Busting */}
-        <div className="rounded-lg border bg-card p-6 animate-fade-in-up" style={{ animationDelay: "0.5s" }}>
+        <div className="rounded-lg border bg-card p-6">
           <h2 className="mb-4 text-2xl font-semibold">Myth Busting</h2>
           <div className="space-y-4">
             {myths.map((item, index) => (

@@ -27,22 +27,18 @@ export function SlideContainer({
   canGoPrev,
 }: SlideContainerProps) {
   const [displaySlide, setDisplaySlide] = useState(currentSlide)
-  const [direction, setDirection] = useState<"left" | "right">("right")
-  const [animationClass, setAnimationClass] = useState("animate-slide-enter-right")
+  const [isVisible, setIsVisible] = useState(true)
 
   useEffect(() => {
     if (currentSlide !== displaySlide) {
-      const newDirection = currentSlide > displaySlide ? "right" : "left"
-      setDirection(newDirection)
+      // Fade out
+      setIsVisible(false)
       
-      // Exit animation
-      setAnimationClass(newDirection === "right" ? "animate-slide-exit-right" : "animate-slide-exit-left")
-      
-      // After exit animation, update slide and enter
+      // After fade out, update slide and fade in
       const timer = setTimeout(() => {
         setDisplaySlide(currentSlide)
-        setAnimationClass(newDirection === "right" ? "animate-slide-enter-right" : "animate-slide-enter-left")
-      }, 300) // Match exit animation duration
+        setIsVisible(true)
+      }, 200) // Short fade duration
 
       return () => clearTimeout(timer)
     }
@@ -90,7 +86,7 @@ export function SlideContainer({
       {/* Slide Content */}
       <div
         key={displaySlide}
-        className={`w-full ${animationClass}`}
+        className={`w-full transition-opacity duration-300 ${isVisible ? "opacity-100" : "opacity-0"}`}
         role="region"
         aria-label={`Slide ${currentSlide + 1} of ${totalSlides}`}
         aria-live="polite"

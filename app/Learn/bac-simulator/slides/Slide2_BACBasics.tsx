@@ -20,15 +20,15 @@ export function Slide2_BACBasics() {
   return (
     <div className="container mx-auto min-h-screen px-4 py-20">
       <div className="mx-auto max-w-4xl">
-        <h1 className="mb-8 text-center text-4xl font-bold md:text-5xl animate-fade-in-up">
+        <h1 className="mb-8 text-center text-4xl font-bold md:text-5xl">
           The Widmark Formula
         </h1>
-        <p className="mb-12 text-center text-lg text-muted-foreground md:text-xl animate-fade-in-up" style={{ animationDelay: "0.1s" }}>
+        <p className="mb-12 text-center text-lg text-muted-foreground md:text-xl">
           The science behind BAC calculation
         </p>
 
         {/* Formula Display */}
-        <div className="mb-8 rounded-lg border bg-card p-6 animate-fade-in-up" style={{ animationDelay: "0.2s" }}>
+        <div className="mb-8 rounded-lg border bg-card p-6">
           <h2 className="mb-4 text-2xl font-semibold">The Formula</h2>
           <div className="space-y-2 font-mono text-lg">
             <p>BAC = (Alcohol in grams / [Weight in grams × r]) × 100</p>
@@ -39,7 +39,7 @@ export function Slide2_BACBasics() {
         </div>
 
         {/* Interactive Demo */}
-        <div className="mb-8 rounded-lg border bg-card p-6 animate-fade-in-up" style={{ animationDelay: "0.3s" }}>
+        <div className="mb-8 rounded-lg border bg-card p-6">
           <h2 className="mb-4 text-2xl font-semibold">Try It Yourself</h2>
           <div className="grid gap-4 md:grid-cols-3">
             <div>
@@ -94,7 +94,7 @@ export function Slide2_BACBasics() {
 
         {/* Key Factors */}
         <div className="grid gap-4 md:grid-cols-2">
-          <div className="rounded-lg border bg-card p-6 animate-fade-in-up" style={{ animationDelay: "0.4s" }}>
+          <div className="rounded-lg border bg-card p-6">
             <h3 className="mb-3 text-xl font-semibold">Weight Impact</h3>
             <p className="mb-4 text-muted-foreground">
               Heavier individuals have more body water, which dilutes alcohol. This means higher
@@ -109,7 +109,7 @@ export function Slide2_BACBasics() {
               </p>
             </div>
           </div>
-          <div className="rounded-lg border bg-card p-6 animate-fade-in-up" style={{ animationDelay: "0.5s" }}>
+          <div className="rounded-lg border bg-card p-6">
             <h3 className="mb-3 text-xl font-semibold">Gender Impact</h3>
             <p className="mb-4 text-muted-foreground">
               Biological differences in body composition mean that females typically have a lower

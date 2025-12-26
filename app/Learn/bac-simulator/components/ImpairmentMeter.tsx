@@ -34,7 +34,7 @@ export function ImpairmentMeter({ bac }: ImpairmentMeterProps) {
         <h4 className="text-lg font-semibold">Impairment Level</h4>
         <p
           key={effects.level}
-          className="text-2xl font-bold capitalize animate-scale-in"
+          className="text-2xl font-bold capitalize transition-colors duration-300"
           style={{ color: getColor() }}
         >
           {effects.level}

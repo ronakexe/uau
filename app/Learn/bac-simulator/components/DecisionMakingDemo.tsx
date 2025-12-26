@@ -78,8 +78,7 @@ export function DecisionMakingDemo({ bac }: DecisionMakingDemoProps) {
               key={scenario.id}
               className={`relative rounded-lg border-2 p-4 ${scenario.bgColor} ${
                 isRisky ? `${scenario.borderColor} border-2` : ""
-              } animate-fade-in-up`}
-              style={{ animationDelay: `${index * 0.1}s` }}
+              }`}
             >
               <div className="mb-3 flex items-start justify-between">
                 <Icon className={`h-6 w-6 ${scenario.color}`} />
@@ -106,7 +105,7 @@ export function DecisionMakingDemo({ bac }: DecisionMakingDemoProps) {
 
               {/* Warning for risky choice */}
               {isRisky && (
-                <div className="mt-3 rounded bg-red-100 p-2 text-xs text-red-700 dark:bg-red-950/40 dark:text-red-400 animate-scale-in">
+                <div className="mt-3 rounded bg-red-100 p-2 text-xs text-red-700 dark:bg-red-950/40 dark:text-red-400">
                   ⚠️ At {bac.toFixed(3)}% BAC, {scenario.likelihood}% of people make this risky
                   choice
                 </div>

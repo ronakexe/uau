@@ -30,21 +30,17 @@ export function Slide10_Resources() {
   return (
     <div className="container mx-auto min-h-screen px-4 py-20">
       <div className="mx-auto max-w-4xl">
-        <h1 className="mb-8 text-center text-4xl font-bold md:text-5xl animate-fade-in-up">
+        <h1 className="mb-8 text-center text-4xl font-bold md:text-5xl">
           Resources & Support
         </h1>
-        <p className="mb-12 text-center text-lg text-muted-foreground md:text-xl animate-fade-in-up" style={{ animationDelay: "0.1s" }}>
+        <p className="mb-12 text-center text-lg text-muted-foreground md:text-xl">
           Help is available if you need it
         </p>
 
         {/* Resources List */}
         <div className="mb-12 space-y-6">
           {resources.map((resource, index) => (
-            <div
-              key={index}
-              className="rounded-lg border bg-card p-6 animate-fade-in-up"
-              style={{ animationDelay: `${0.2 + index * 0.1}s` }}
-            >
+            <div key={index} className="rounded-lg border bg-card p-6">
               <h3 className="mb-2 text-xl font-semibold">{resource.title}</h3>
               <p className="mb-4 text-muted-foreground">{resource.description}</p>
               <div className="flex flex-wrap gap-4">
@@ -77,7 +73,7 @@ export function Slide10_Resources() {
         </div>
 
         {/* Emergency Information */}
-        <div className="rounded-lg border-l-4 border-red-500 bg-red-50 p-6 dark:bg-red-950/20 animate-fade-in-up" style={{ animationDelay: "0.6s" }}>
+        <div className="rounded-lg border-l-4 border-red-500 bg-red-50 p-6 dark:bg-red-950/20">
           <h3 className="mb-2 text-xl font-semibold text-red-700 dark:text-red-400">
             Emergency: Alcohol Poisoning
           </h3>
@@ -96,7 +92,7 @@ export function Slide10_Resources() {
         </div>
 
         {/* Final Message */}
-        <div className="mt-12 rounded-lg border bg-primary/5 p-6 text-center animate-fade-in-up" style={{ animationDelay: "0.7s" }}>
+        <div className="mt-12 rounded-lg border bg-primary/5 p-6 text-center">
           <p className="text-lg font-semibold">Thank you for learning with us!</p>
           <p className="mt-2 text-sm text-muted-foreground">
             Visit{" "}
