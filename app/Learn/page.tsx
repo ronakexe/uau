@@ -1,6 +1,7 @@
 "use client"
 
 import { motion } from "framer-motion"
+import { useRouter } from "next/navigation"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Lock } from "lucide-react"
 
@@ -26,6 +27,15 @@ const learnCards = [
 ]
 
 export default function Learn() {
+  const router = useRouter()
+
+  const handleCardClick = (card: typeof learnCards[0]) => {
+    if (card.locked) return
+    if (card.id === 1) {
+      router.push("/Learn/bac-simulator")
+    }
+  }
+
   return (
     <main className="min-h-screen">
       {/* Hero Section */}
@@ -64,7 +74,7 @@ export default function Learn() {
                     ? "opacity-60 cursor-not-allowed"
                     : "hover:shadow-lg hover:scale-105 cursor-pointer"
                 }`}
-                onClick={() => !card.locked && console.log(`Navigate to ${card.title}`)}
+                onClick={() => handleCardClick(card)}
               >
                 <CardHeader>
                   <div className="flex items-center justify-between">

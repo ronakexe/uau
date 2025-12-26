@@ -47,7 +47,7 @@ export default function Home() {
             transition={{ delay: 0.8, duration: 0.6 }}
             className="flex justify-center gap-4"
           >
-            <Link href="/about">
+            <Link href="/Learn">
               <Button size="lg" className="hover:scale-105 transition-transform">
                 Learn More
               </Button>
