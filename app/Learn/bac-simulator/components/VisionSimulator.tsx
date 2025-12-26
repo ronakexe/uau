@@ -1,7 +1,6 @@
 "use client"
 
-import { useState } from "react"
-import { motion } from "framer-motion"
+import { useState, useEffect } from "react"
 import { getVisionFilterValues } from "../utils/impairmentLevels"
 
 interface VisionSimulatorProps {
@@ -11,6 +10,7 @@ interface VisionSimulatorProps {
 export function VisionSimulator({ bac }: VisionSimulatorProps) {
   const [showSplitScreen, setShowSplitScreen] = useState(false)
   const visionFilters = getVisionFilterValues(bac)
+  const [filterStyle, setFilterStyle] = useState<React.CSSProperties>({})
 
   // Create tunnel vision mask using radial gradient
   const tunnelMaskStyle = {
@@ -18,10 +18,13 @@ export function VisionSimulator({ bac }: VisionSimulatorProps) {
     WebkitMaskImage: `radial-gradient(circle at center, transparent 0%, transparent ${visionFilters.tunnelRadius}%, black 100%)`,
   }
 
-  const filterStyle = {
-    filter: `blur(${visionFilters.blur}px) saturate(${visionFilters.saturation}) brightness(${visionFilters.brightness})`,
-    ...tunnelMaskStyle,
-  }
+  useEffect(() => {
+    setFilterStyle({
+      filter: `blur(${visionFilters.blur}px) saturate(${visionFilters.saturation}) brightness(${visionFilters.brightness})`,
+      ...tunnelMaskStyle,
+      transition: "filter 0.5s ease-out",
+    })
+  }, [visionFilters.blur, visionFilters.saturation, visionFilters.brightness, visionFilters.tunnelRadius])
 
   // Sample driving scene (simplified representation)
   const DrivingScene = ({ impaired = false }: { impaired?: boolean }) => (
@@ -106,15 +109,9 @@ export function VisionSimulator({ bac }: VisionSimulatorProps) {
             <h4 className="mb-2 text-center font-semibold">
               Your Vision at {bac.toFixed(3)}% BAC
             </h4>
-            <motion.div
-              className="aspect-video"
-              animate={{
-                filter: `blur(${visionFilters.blur}px) saturate(${visionFilters.saturation}) brightness(${visionFilters.brightness})`,
-              }}
-              transition={{ duration: 0.5 }}
-            >
+            <div className="aspect-video">
               <DrivingScene impaired={true} />
-            </motion.div>
+            </div>
           </div>
         )}
       </div>
@@ -137,4 +134,3 @@ export function VisionSimulator({ bac }: VisionSimulatorProps) {
     </div>
   )
 }
-

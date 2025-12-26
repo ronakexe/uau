@@ -1,7 +1,5 @@
 "use client"
 
-import { motion } from "framer-motion"
-import { staggerContainer, staggerItem } from "../utils/animations"
 import { CheckCircle2 } from "lucide-react"
 
 export function Slide9_Summary() {
@@ -23,24 +21,13 @@ export function Slide9_Summary() {
 
   return (
     <div className="container mx-auto min-h-screen px-4 py-20">
-      <motion.div
-        variants={staggerContainer}
-        initial="initial"
-        animate="animate"
-        className="mx-auto max-w-4xl"
-      >
-        <motion.h1
-          variants={staggerItem}
-          className="mb-8 text-center text-4xl font-bold md:text-5xl"
-        >
+      <div className="mx-auto max-w-4xl">
+        <h1 className="mb-8 text-center text-4xl font-bold md:text-5xl animate-fade-in-up">
           Key Takeaways
-        </motion.h1>
+        </h1>
 
         {/* Main Takeaways */}
-        <motion.div
-          variants={staggerItem}
-          className="mb-12 rounded-lg border bg-card p-6"
-        >
+        <div className="mb-12 rounded-lg border bg-card p-6 animate-fade-in-up" style={{ animationDelay: "0.1s" }}>
           <h2 className="mb-4 text-2xl font-semibold">What You've Learned</h2>
           <ul className="space-y-3">
             {takeaways.map((takeaway, index) => (
@@ -50,13 +37,10 @@ export function Slide9_Summary() {
               </li>
             ))}
           </ul>
-        </motion.div>
+        </div>
 
         {/* Prevention Strategies */}
-        <motion.div
-          variants={staggerItem}
-          className="mb-12 rounded-lg border bg-primary/5 p-6"
-        >
+        <div className="mb-12 rounded-lg border bg-primary/5 p-6 animate-fade-in-up" style={{ animationDelay: "0.2s" }}>
           <h2 className="mb-4 text-2xl font-semibold">Prevention Strategies</h2>
           <ul className="space-y-3">
             {prevention.map((strategy, index) => (
@@ -66,13 +50,10 @@ export function Slide9_Summary() {
               </li>
             ))}
           </ul>
-        </motion.div>
+        </div>
 
         {/* Call to Action */}
-        <motion.div
-          variants={staggerItem}
-          className="rounded-lg border-l-4 border-primary bg-primary/10 p-6"
-        >
+        <div className="rounded-lg border-l-4 border-primary bg-primary/10 p-6 animate-fade-in-up" style={{ animationDelay: "0.3s" }}>
           <p className="text-center text-lg font-semibold">
             Think before you drink. Plan for safe transportation.
           </p>
@@ -80,9 +61,8 @@ export function Slide9_Summary() {
             Knowledge is power. Understanding how alcohol affects your body helps you make safer
             choices.
           </p>
-        </motion.div>
-      </motion.div>
+        </div>
+      </div>
     </div>
   )
 }
-

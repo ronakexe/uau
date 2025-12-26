@@ -36,3 +36,149 @@
   }
 }
 
+@layer utilities {
+  /* Slide animations */
+  @keyframes slideEnterRight {
+    from {
+      transform: translateX(1000px);
+      opacity: 0;
+      scale: 0.95;
+    }
+    to {
+      transform: translateX(0);
+      opacity: 1;
+      scale: 1;
+    }
+  }
+
+  @keyframes slideEnterLeft {
+    from {
+      transform: translateX(-1000px);
+      opacity: 0;
+      scale: 0.95;
+    }
+    to {
+      transform: translateX(0);
+      opacity: 1;
+      scale: 1;
+    }
+  }
+
+  @keyframes slideExitRight {
+    from {
+      transform: translateX(0);
+      opacity: 1;
+      scale: 1;
+    }
+    to {
+      transform: translateX(1000px);
+      opacity: 0;
+      scale: 0.95;
+    }
+  }
+
+  @keyframes slideExitLeft {
+    from {
+      transform: translateX(0);
+      opacity: 1;
+      scale: 1;
+    }
+    to {
+      transform: translateX(-1000px);
+      opacity: 0;
+      scale: 0.95;
+    }
+  }
+
+  @keyframes fadeInUp {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+
+  @keyframes scaleIn {
+    from {
+      transform: scale(0);
+      opacity: 0;
+    }
+    to {
+      transform: scale(1);
+      opacity: 1;
+    }
+  }
+
+  @keyframes pulse {
+    0%, 100% {
+      transform: scale(1);
+      opacity: 1;
+    }
+    50% {
+      transform: scale(1.05);
+      opacity: 0.8;
+    }
+  }
+
+  @keyframes wobble {
+    0%, 100% {
+      transform: rotate(0deg);
+    }
+    25% {
+      transform: rotate(-2deg);
+    }
+    75% {
+      transform: rotate(2deg);
+    }
+  }
+
+  /* Animation classes */
+  .animate-slide-enter-right {
+    animation: slideEnterRight 0.4s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+  }
+
+  .animate-slide-enter-left {
+    animation: slideEnterLeft 0.4s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+  }
+
+  .animate-slide-exit-right {
+    animation: slideExitRight 0.3s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+  }
+
+  .animate-slide-exit-left {
+    animation: slideExitLeft 0.3s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+  }
+
+  .animate-fade-in-up {
+    animation: fadeInUp 0.6s ease-out forwards;
+  }
+
+  .animate-fade-in {
+    animation: fadeIn 0.4s ease-in-out forwards;
+  }
+
+  .animate-scale-in {
+    animation: scaleIn 0.4s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+  }
+
+  .animate-pulse-custom {
+    animation: pulse 2s ease-in-out infinite;
+  }
+
+  .animate-wobble {
+    animation: wobble 0.5s ease-in-out infinite;
+  }
+}
+

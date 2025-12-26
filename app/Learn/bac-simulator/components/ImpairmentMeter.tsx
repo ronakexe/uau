@@ -1,6 +1,6 @@
 "use client"
 
-import { motion } from "framer-motion"
+import { useEffect, useState } from "react"
 import { getImpairmentEffects } from "../utils/impairmentLevels"
 
 interface ImpairmentMeterProps {
@@ -9,6 +9,7 @@ interface ImpairmentMeterProps {
 
 export function ImpairmentMeter({ bac }: ImpairmentMeterProps) {
   const effects = getImpairmentEffects(bac)
+  const [meterWidth, setMeterWidth] = useState(0)
 
   const getColor = () => {
     switch (effects.colorZone) {
@@ -23,32 +24,29 @@ export function ImpairmentMeter({ bac }: ImpairmentMeterProps) {
     }
   }
 
+  useEffect(() => {
+    setMeterWidth(Math.min(100, (bac / 0.30) * 100))
+  }, [bac])
+
   return (
     <div className="space-y-4">
       <div className="text-center">
         <h4 className="text-lg font-semibold">Impairment Level</h4>
-        <motion.p
+        <p
           key={effects.level}
-          initial={{ scale: 1.2, opacity: 0 }}
-          animate={{ scale: 1, opacity: 1 }}
-          className="text-2xl font-bold capitalize"
+          className="text-2xl font-bold capitalize animate-scale-in"
           style={{ color: getColor() }}
         >
           {effects.level}
-        </motion.p>
+        </p>
         <p className="text-sm text-muted-foreground">{effects.description}</p>
       </div>
 
       {/* Visual Meter */}
       <div className="relative h-8 w-full overflow-hidden rounded-full bg-muted">
-        <motion.div
-          className="h-full"
-          style={{ backgroundColor: getColor() }}
-          initial={{ width: 0 }}
-          animate={{
-            width: `${Math.min(100, (bac / 0.30) * 100)}%`,
-          }}
-          transition={{ duration: 0.5, ease: "easeOut" }}
+        <div
+          className="h-full transition-all duration-500 ease-out"
+          style={{ backgroundColor: getColor(), width: `${meterWidth}%` }}
         />
         {/* Markers */}
         <div className="absolute inset-0 flex">
@@ -69,4 +67,3 @@ export function ImpairmentMeter({ bac }: ImpairmentMeterProps) {
     </div>
   )
 }
-

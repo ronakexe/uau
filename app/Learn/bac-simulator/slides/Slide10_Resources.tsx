@@ -1,8 +1,6 @@
 "use client"
 
-import { motion } from "framer-motion"
 import { ExternalLink, Phone } from "lucide-react"
-import { staggerContainer, staggerItem } from "../utils/animations"
 
 export function Slide10_Resources() {
   const resources = [
@@ -31,32 +29,21 @@ export function Slide10_Resources() {
 
   return (
     <div className="container mx-auto min-h-screen px-4 py-20">
-      <motion.div
-        variants={staggerContainer}
-        initial="initial"
-        animate="animate"
-        className="mx-auto max-w-4xl"
-      >
-        <motion.h1
-          variants={staggerItem}
-          className="mb-8 text-center text-4xl font-bold md:text-5xl"
-        >
+      <div className="mx-auto max-w-4xl">
+        <h1 className="mb-8 text-center text-4xl font-bold md:text-5xl animate-fade-in-up">
           Resources & Support
-        </motion.h1>
-        <motion.p
-          variants={staggerItem}
-          className="mb-12 text-center text-lg text-muted-foreground md:text-xl"
-        >
+        </h1>
+        <p className="mb-12 text-center text-lg text-muted-foreground md:text-xl animate-fade-in-up" style={{ animationDelay: "0.1s" }}>
           Help is available if you need it
-        </motion.p>
+        </p>
 
         {/* Resources List */}
         <div className="mb-12 space-y-6">
           {resources.map((resource, index) => (
-            <motion.div
+            <div
               key={index}
-              variants={staggerItem}
-              className="rounded-lg border bg-card p-6"
+              className="rounded-lg border bg-card p-6 animate-fade-in-up"
+              style={{ animationDelay: `${0.2 + index * 0.1}s` }}
             >
               <h3 className="mb-2 text-xl font-semibold">{resource.title}</h3>
               <p className="mb-4 text-muted-foreground">{resource.description}</p>
@@ -85,15 +72,12 @@ export function Slide10_Resources() {
                   <p className="text-sm text-muted-foreground">{resource.note}</p>
                 )}
               </div>
-            </motion.div>
+            </div>
           ))}
         </div>
 
         {/* Emergency Information */}
-        <motion.div
-          variants={staggerItem}
-          className="rounded-lg border-l-4 border-red-500 bg-red-50 p-6 dark:bg-red-950/20"
-        >
+        <div className="rounded-lg border-l-4 border-red-500 bg-red-50 p-6 dark:bg-red-950/20 animate-fade-in-up" style={{ animationDelay: "0.6s" }}>
           <h3 className="mb-2 text-xl font-semibold text-red-700 dark:text-red-400">
             Emergency: Alcohol Poisoning
           </h3>
@@ -109,13 +93,10 @@ export function Slide10_Resources() {
             <Phone className="h-4 w-4" />
             Call 911
           </a>
-        </motion.div>
+        </div>
 
         {/* Final Message */}
-        <motion.div
-          variants={staggerItem}
-          className="mt-12 rounded-lg border bg-primary/5 p-6 text-center"
-        >
+        <div className="mt-12 rounded-lg border bg-primary/5 p-6 text-center animate-fade-in-up" style={{ animationDelay: "0.7s" }}>
           <p className="text-lg font-semibold">Thank you for learning with us!</p>
           <p className="mt-2 text-sm text-muted-foreground">
             Visit{" "}
@@ -129,9 +110,8 @@ export function Slide10_Resources() {
             </a>{" "}
             for more resources
           </p>
-        </motion.div>
-      </motion.div>
+        </div>
+      </div>
     </div>
   )
 }
-

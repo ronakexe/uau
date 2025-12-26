@@ -1,6 +1,6 @@
 "use client"
 
-import { motion } from "framer-motion"
+import { useEffect, useState } from "react"
 import { CheckCircle2, XCircle, AlertCircle } from "lucide-react"
 import { getDecisionMakingStats } from "../utils/impairmentLevels"
 
@@ -10,6 +10,7 @@ interface DecisionMakingDemoProps {
 
 export function DecisionMakingDemo({ bac }: DecisionMakingDemoProps) {
   const stats = getDecisionMakingStats(bac)
+  const [barWidths, setBarWidths] = useState<Record<string, number>>({})
 
   const scenarios = [
     {
@@ -47,6 +48,16 @@ export function DecisionMakingDemo({ bac }: DecisionMakingDemoProps) {
     },
   ]
 
+  useEffect(() => {
+    const newWidths: Record<string, number> = {}
+    scenarios.forEach((scenario, index) => {
+      setTimeout(() => {
+        newWidths[scenario.id] = scenario.likelihood
+        setBarWidths({ ...newWidths })
+      }, index * 100)
+    })
+  }, [bac])
+
   return (
     <div className="space-y-6">
       <div className="text-center">
@@ -63,14 +74,12 @@ export function DecisionMakingDemo({ bac }: DecisionMakingDemoProps) {
           const isRisky = scenario.id === "drive" && stats.chooseToDrive > 30
 
           return (
-            <motion.div
+            <div
               key={scenario.id}
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: index * 0.1 }}
               className={`relative rounded-lg border-2 p-4 ${scenario.bgColor} ${
                 isRisky ? `${scenario.borderColor} border-2` : ""
-              }`}
+              } animate-fade-in-up`}
+              style={{ animationDelay: `${index * 0.1}s` }}
             >
               <div className="mb-3 flex items-start justify-between">
                 <Icon className={`h-6 w-6 ${scenario.color}`} />
@@ -88,27 +97,21 @@ export function DecisionMakingDemo({ bac }: DecisionMakingDemoProps) {
                   <span className={`font-semibold ${scenario.color}`}>{scenario.likelihood}%</span>
                 </div>
                 <div className="h-2 w-full overflow-hidden rounded-full bg-muted">
-                  <motion.div
-                    className={`h-full ${scenario.color.replace("text-", "bg-")}`}
-                    initial={{ width: 0 }}
-                    animate={{ width: `${scenario.likelihood}%` }}
-                    transition={{ duration: 0.5, delay: index * 0.1 }}
+                  <div
+                    className={`h-full transition-all duration-500 ease-out ${scenario.color.replace("text-", "bg-")}`}
+                    style={{ width: `${barWidths[scenario.id] || 0}%` }}
                   />
                 </div>
               </div>
 
               {/* Warning for risky choice */}
               {isRisky && (
-                <motion.div
-                  initial={{ opacity: 0, scale: 0.9 }}
-                  animate={{ opacity: 1, scale: 1 }}
-                  className="mt-3 rounded bg-red-100 p-2 text-xs text-red-700 dark:bg-red-950/40 dark:text-red-400"
-                >
+                <div className="mt-3 rounded bg-red-100 p-2 text-xs text-red-700 dark:bg-red-950/40 dark:text-red-400 animate-scale-in">
                   ⚠️ At {bac.toFixed(3)}% BAC, {scenario.likelihood}% of people make this risky
                   choice
-                </motion.div>
+                </div>
               )}
-            </motion.div>
+            </div>
           )
         })}
       </div>
@@ -150,4 +153,3 @@ export function DecisionMakingDemo({ bac }: DecisionMakingDemoProps) {
     </div>
   )
 }
-

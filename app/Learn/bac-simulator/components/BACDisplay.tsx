@@ -1,6 +1,6 @@
 "use client"
 
-import { motion } from "framer-motion"
+import { useEffect, useState } from "react"
 import { AlertTriangle, TrendingUp, TrendingDown } from "lucide-react"
 import { LEGAL_LIMITS } from "../utils/constants"
 import { getImpairmentEffects } from "../utils/impairmentLevels"
@@ -20,6 +20,8 @@ export function BACDisplay({
 }: BACDisplayProps) {
   const effects = getImpairmentEffects(currentBAC)
   const isRising = currentBAC < peakBAC && peakBAC > 0
+  const [animatedBAC, setAnimatedBAC] = useState(currentBAC)
+  const [gaugeOffset, setGaugeOffset] = useState(2 * Math.PI * 45)
 
   // Calculate gauge percentage (0-100%)
   const gaugePercentage = Math.min(100, (currentBAC / 0.30) * 100) // Max display at 0.30%
@@ -32,6 +34,17 @@ export function BACDisplay({
     return "rgb(239, 68, 68)" // red
   }
 
+  // Animate BAC value changes
+  useEffect(() => {
+    setAnimatedBAC(currentBAC)
+  }, [currentBAC])
+
+  // Animate gauge circle
+  useEffect(() => {
+    const targetOffset = 2 * Math.PI * 45 * (1 - gaugePercentage / 100)
+    setGaugeOffset(targetOffset)
+  }, [gaugePercentage])
+
   return (
     <div className="space-y-6 rounded-lg border bg-card p-6">
       <h3 className="text-xl font-semibold">Your BAC</h3>
@@ -39,16 +52,13 @@ export function BACDisplay({
       {/* Large BAC Readout */}
       <div className="flex flex-col items-center justify-center space-y-4">
         <div className="relative">
-          <motion.div
+          <div
             key={currentBAC}
-            initial={{ scale: 1.2, opacity: 0 }}
-            animate={{ scale: 1, opacity: 1 }}
-            transition={{ duration: 0.3 }}
-            className="text-6xl font-mono font-bold md:text-7xl"
+            className="text-6xl font-mono font-bold md:text-7xl animate-scale-in"
             style={{ color: getGaugeColor() }}
           >
-            {currentBAC.toFixed(3)}%
-          </motion.div>
+            {animatedBAC.toFixed(3)}%
+          </div>
         </div>
 
         {/* Trend Indicator */}
@@ -70,14 +80,10 @@ export function BACDisplay({
 
         {/* Legal Limit Warning */}
         {isAboveLegal && (
-          <motion.div
-            initial={{ scale: 0.9, opacity: 0 }}
-            animate={{ scale: 1, opacity: 1 }}
-            className="flex items-center gap-2 rounded-lg bg-destructive/10 p-3 text-destructive"
-          >
+          <div className="flex items-center gap-2 rounded-lg bg-destructive/10 p-3 text-destructive animate-scale-in">
             <AlertTriangle className="h-5 w-5" />
             <span className="font-semibold">ABOVE LEGAL DRIVING LIMIT (0.08%)</span>
-          </motion.div>
+          </div>
         )}
 
         {/* Impairment Level */}
@@ -105,7 +111,7 @@ export function BACDisplay({
               className="text-muted"
             />
             {/* Progress circle */}
-            <motion.circle
+            <circle
               cx="50"
               cy="50"
               r="45"
@@ -114,11 +120,10 @@ export function BACDisplay({
               strokeWidth="8"
               strokeLinecap="round"
               strokeDasharray={`${2 * Math.PI * 45}`}
-              initial={{ strokeDashoffset: 2 * Math.PI * 45 }}
-              animate={{
-                strokeDashoffset: 2 * Math.PI * 45 * (1 - gaugePercentage / 100),
+              style={{
+                strokeDashoffset: gaugeOffset,
+                transition: "stroke-dashoffset 0.5s ease-out",
               }}
-              transition={{ duration: 0.5, ease: "easeOut" }}
             />
             {/* Color zones */}
             <circle
@@ -193,4 +198,3 @@ export function BACDisplay({
     </div>
   )
 }
-

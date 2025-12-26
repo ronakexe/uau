@@ -1,10 +1,8 @@
 "use client"
 
-import { useState, useCallback, useEffect } from "react"
-import { motion, AnimatePresence } from "framer-motion"
+import { useState, useCallback } from "react"
 import { Button } from "@/components/ui/button"
 import { useImpairmentEffects } from "../hooks/useImpairmentEffects"
-import { calculateImpairedReactionTime } from "../utils/impairmentLevels"
 
 interface ReactionTimeVisualProps {
   bac: number
@@ -85,18 +83,13 @@ export function ReactionTimeVisual({ bac }: ReactionTimeVisualProps) {
 
       {/* Test Area */}
       <div className="relative flex min-h-[300px] items-center justify-center rounded-lg border bg-muted/20">
-        <AnimatePresence>
-          {showTarget && (
-            <motion.button
-              initial={{ scale: 0, opacity: 0 }}
-              animate={{ scale: 1, opacity: 1 }}
-              exit={{ scale: 0, opacity: 0 }}
-              onClick={handleTargetClick}
-              className="h-24 w-24 rounded-full bg-red-500 shadow-lg transition-all hover:scale-110"
-              aria-label="Click target as fast as possible"
-            />
-          )}
-        </AnimatePresence>
+        {showTarget && (
+          <button
+            onClick={handleTargetClick}
+            className="h-24 w-24 rounded-full bg-red-500 shadow-lg transition-all hover:scale-110 animate-scale-in"
+            aria-label="Click target as fast as possible"
+          />
+        )}
 
         {!showTarget && testPhase !== "complete" && (
           <Button onClick={startTest} size="lg">
@@ -167,4 +160,3 @@ export function ReactionTimeVisual({ bac }: ReactionTimeVisualProps) {
     </div>
   )
 }
-

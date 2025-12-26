@@ -1,8 +1,5 @@
 "use client"
 
-import { motion } from "framer-motion"
-import { staggerContainer, staggerItem } from "../utils/animations"
-
 export function Slide1_Education() {
   const facts = [
     {
@@ -29,43 +26,32 @@ export function Slide1_Education() {
 
   return (
     <div className="container mx-auto min-h-screen px-4 py-20">
-      <motion.div
-        variants={staggerContainer}
-        initial="initial"
-        animate="animate"
-        className="mx-auto max-w-4xl"
-      >
-        <motion.h1
-          variants={staggerItem}
-          className="mb-8 text-center text-4xl font-bold md:text-5xl"
-        >
+      <div className="mx-auto max-w-4xl">
+        <h1 className="mb-8 text-center text-4xl font-bold md:text-5xl animate-fade-in-up">
           What is BAC?
-        </motion.h1>
+        </h1>
 
-        <motion.p
-          variants={staggerItem}
-          className="mb-12 text-center text-lg text-muted-foreground md:text-xl"
-        >
+        <p className="mb-12 text-center text-lg text-muted-foreground md:text-xl animate-fade-in-up" style={{ animationDelay: "0.1s" }}>
           Blood Alcohol Concentration measures how much alcohol is in your bloodstream
-        </motion.p>
+        </p>
 
         <div className="grid gap-6 md:grid-cols-2">
           {facts.map((fact, index) => (
-            <motion.div
+            <div
               key={index}
-              variants={staggerItem}
-              className="rounded-lg border bg-card p-6"
+              className="rounded-lg border bg-card p-6 animate-fade-in-up"
+              style={{ animationDelay: `${0.2 + index * 0.1}s` }}
             >
               <h3 className="mb-3 text-xl font-semibold">{fact.title}</h3>
               <p className="text-muted-foreground">{fact.content}</p>
-            </motion.div>
+            </div>
           ))}
         </div>
 
         {/* Visual explanation */}
-        <motion.div
-          variants={staggerItem}
-          className="mt-12 rounded-lg border bg-muted/20 p-6"
+        <div
+          className="mt-12 rounded-lg border bg-muted/20 p-6 animate-fade-in-up"
+          style={{ animationDelay: "0.6s" }}
         >
           <h3 className="mb-4 text-xl font-semibold">Visual Example</h3>
           <p className="mb-4 text-muted-foreground">
@@ -84,9 +70,8 @@ export function Slide1_Education() {
               <span className="text-xs text-muted-foreground">blood</span>
             </div>
           </div>
-        </motion.div>
-      </motion.div>
+        </div>
+      </div>
     </div>
   )
 }
-

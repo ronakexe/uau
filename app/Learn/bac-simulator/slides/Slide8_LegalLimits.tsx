@@ -1,7 +1,5 @@
 "use client"
 
-import { motion } from "framer-motion"
-import { staggerContainer, staggerItem } from "../utils/animations"
 import { LEGAL_LIMITS } from "../utils/constants"
 
 export function Slide8_LegalLimits() {
@@ -50,26 +48,18 @@ export function Slide8_LegalLimits() {
 
   return (
     <div className="container mx-auto min-h-screen px-4 py-20">
-      <motion.div
-        variants={staggerContainer}
-        initial="initial"
-        animate="animate"
-        className="mx-auto max-w-4xl"
-      >
-        <motion.h1
-          variants={staggerItem}
-          className="mb-8 text-center text-4xl font-bold md:text-5xl"
-        >
+      <div className="mx-auto max-w-4xl">
+        <h1 className="mb-8 text-center text-4xl font-bold md:text-5xl animate-fade-in-up">
           Legal Limits & Consequences
-        </motion.h1>
+        </h1>
 
         {/* Legal Thresholds */}
         <div className="mb-12 space-y-6">
           {thresholds.map((threshold, index) => (
-            <motion.div
+            <div
               key={index}
-              variants={staggerItem}
-              className="rounded-lg border bg-card p-6"
+              className="rounded-lg border bg-card p-6 animate-fade-in-up"
+              style={{ animationDelay: `${0.1 + index * 0.1}s` }}
             >
               <div className="mb-2 flex items-center gap-4">
                 <div className={`text-3xl font-bold ${threshold.color}`}>
@@ -78,15 +68,12 @@ export function Slide8_LegalLimits() {
                 <h3 className="text-xl font-semibold">{threshold.label}</h3>
               </div>
               <p className="text-muted-foreground">{threshold.description}</p>
-            </motion.div>
+            </div>
           ))}
         </div>
 
         {/* Non-Legal Consequences */}
-        <motion.div
-          variants={staggerItem}
-          className="mb-12 rounded-lg border bg-card p-6"
-        >
+        <div className="mb-12 rounded-lg border bg-card p-6 animate-fade-in-up" style={{ animationDelay: "0.4s" }}>
           <h2 className="mb-4 text-2xl font-semibold">Beyond Legal Consequences</h2>
           <div className="grid gap-4 md:grid-cols-2">
             <div>
@@ -108,10 +95,10 @@ export function Slide8_LegalLimits() {
               </ul>
             </div>
           </div>
-        </motion.div>
+        </div>
 
         {/* Myth Busting */}
-        <motion.div variants={staggerItem} className="rounded-lg border bg-card p-6">
+        <div className="rounded-lg border bg-card p-6 animate-fade-in-up" style={{ animationDelay: "0.5s" }}>
           <h2 className="mb-4 text-2xl font-semibold">Myth Busting</h2>
           <div className="space-y-4">
             {myths.map((item, index) => (
@@ -128,9 +115,8 @@ export function Slide8_LegalLimits() {
               drink per hour (0.015% BAC per hour). Plan accordingly.
             </p>
           </div>
-        </motion.div>
-      </motion.div>
+        </div>
+      </div>
     </div>
   )
 }
-

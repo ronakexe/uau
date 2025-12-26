@@ -1,10 +1,9 @@
 "use client"
 
-import { motion, AnimatePresence } from "framer-motion"
+import { useState, useEffect } from "react"
 import { ChevronLeft, ChevronRight } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { ProgressIndicator } from "./ProgressIndicator"
-import { slideVariants } from "../utils/animations"
 
 interface SlideContainerProps {
   children: React.ReactNode
@@ -27,6 +26,27 @@ export function SlideContainer({
   canGoNext,
   canGoPrev,
 }: SlideContainerProps) {
+  const [displaySlide, setDisplaySlide] = useState(currentSlide)
+  const [direction, setDirection] = useState<"left" | "right">("right")
+  const [animationClass, setAnimationClass] = useState("animate-slide-enter-right")
+
+  useEffect(() => {
+    if (currentSlide !== displaySlide) {
+      const newDirection = currentSlide > displaySlide ? "right" : "left"
+      setDirection(newDirection)
+      
+      // Exit animation
+      setAnimationClass(newDirection === "right" ? "animate-slide-exit-right" : "animate-slide-exit-left")
+      
+      // After exit animation, update slide and enter
+      const timer = setTimeout(() => {
+        setDisplaySlide(currentSlide)
+        setAnimationClass(newDirection === "right" ? "animate-slide-enter-right" : "animate-slide-enter-left")
+      }, 300) // Match exit animation duration
+
+      return () => clearTimeout(timer)
+    }
+  }, [currentSlide, displaySlide])
 
   return (
     <div className="relative min-h-screen w-full">
@@ -68,22 +88,15 @@ export function SlideContainer({
       </div>
 
       {/* Slide Content */}
-      <AnimatePresence mode="wait" custom={1}>
-        <motion.div
-          key={currentSlide}
-          custom={1}
-          variants={slideVariants}
-          initial="enter"
-          animate="center"
-          exit="exit"
-          className="w-full"
-          role="region"
-          aria-label={`Slide ${currentSlide + 1} of ${totalSlides}`}
-          aria-live="polite"
-        >
-          {children}
-        </motion.div>
-      </AnimatePresence>
+      <div
+        key={displaySlide}
+        className={`w-full ${animationClass}`}
+        role="region"
+        aria-label={`Slide ${currentSlide + 1} of ${totalSlides}`}
+        aria-live="polite"
+      >
+        {children}
+      </div>
 
       {/* Progress Indicator */}
       <div className="fixed bottom-4 left-1/2 z-50 w-full max-w-2xl -translate-x-1/2 px-4 md:bottom-8">
@@ -96,4 +109,3 @@ export function SlideContainer({
     </div>
   )
 }
-

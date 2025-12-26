@@ -1,7 +1,6 @@
 "use client"
 
-import { motion } from "framer-motion"
-import { progressBarVariants } from "../utils/animations"
+import { useEffect, useState } from "react"
 
 interface ProgressIndicatorProps {
   currentSlide: number
@@ -15,17 +14,19 @@ export function ProgressIndicator({
   onSlideClick,
 }: ProgressIndicatorProps) {
   const progress = ((currentSlide + 1) / totalSlides) * 100
+  const [animatedProgress, setAnimatedProgress] = useState(progress)
+
+  useEffect(() => {
+    setAnimatedProgress(progress)
+  }, [progress])
 
   return (
     <div className="w-full space-y-4" role="navigation" aria-label="Slide navigation">
       {/* Progress Bar */}
       <div className="relative h-2 w-full overflow-hidden rounded-full bg-muted">
-        <motion.div
-          className="h-full bg-primary"
-          variants={progressBarVariants}
-          initial="initial"
-          animate="animate"
-          custom={progress}
+        <div
+          className="h-full bg-primary transition-all duration-500 ease-out"
+          style={{ width: `${animatedProgress}%` }}
         />
       </div>
 
@@ -53,4 +54,3 @@ export function ProgressIndicator({
     </div>
   )
 }
-
