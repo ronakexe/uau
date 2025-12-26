@@ -2,38 +2,14 @@
 
 import Image from "next/image"
 import { motion } from "framer-motion"
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 
 const partnerships = [
   {
-    name: "Partner Organization 1",
+    name: "West Keller Dental",
     description:
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
-  },
-  {
-    name: "Partner Organization 2",
-    description:
-      "Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
-  },
-  {
-    name: "Partner Organization 3",
-    description:
-      "Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.",
-  },
-  {
-    name: "Partner Organization 4",
-    description:
-      "Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
-  },
-  {
-    name: "Partner Organization 5",
-    description:
-      "Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium.",
-  },
-  {
-    name: "Partner Organization 6",
-    description:
-      "Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores.",
+      "A trusted dental practice committed to supporting community health and substance use prevention among teenagers. Together, we're working to create a safer future for our youth.",
+    image: "/images/west-keller-dental-partner-image.png",
   },
 ]
 
@@ -74,17 +50,16 @@ export default function Partnerships() {
                 <CardHeader>
                   <div className="mb-4 h-32 w-full overflow-hidden rounded-lg">
                     <Image
-                      src={`https://placehold.co/400x300/800000/ffffff?text=Logo`}
-                      alt={`${partner.name} logo placeholder`}
+                      src={partner.image || `https://placehold.co/400x300/800000/ffffff?text=Logo`}
+                      alt={`${partner.name} logo`}
                       width={400}
                       height={300}
                       className="h-full w-full object-cover transition-transform duration-300 group-hover:scale-110"
                     />
                   </div>
-                  <CardTitle className="text-xl">{partner.name}</CardTitle>
-                  <CardDescription>Strategic Partner</CardDescription>
+                  <CardTitle className="text-xl mb-0">{partner.name}</CardTitle>
                 </CardHeader>
-                <CardContent>
+                <CardContent className="pt-4">
                   <p className="text-sm text-muted-foreground">
                     {partner.description}
                   </p>
