@@ -38,7 +38,7 @@ export default function Home() {
             transition={{ delay: 0.6, duration: 0.6 }}
             className="mx-auto mb-12 max-w-2xl text-lg leading-relaxed text-muted-foreground"
           >
-            United Against Use is dedicated to preventing the leading cause of death in teenagers, substance use.
+            United Against Use is dedicated to preventing the #1 rising cause of death in teenagers, substance use.
             We believe every life is precious and no one should lose it to alcohol.
           </motion.p>
           <motion.div
