@@ -131,8 +131,11 @@ export function ComparisonChart({ currentBAC }: ComparisonChartProps) {
             <XAxis dataKey="metric" />
             <YAxis label={{ value: "Percentage", angle: -90, position: "insideLeft" }} />
             <Tooltip
-              formatter={(value: number | undefined, name: string) => {
-                if (value === undefined) return ["N/A", name === "value" ? "Current" : "Baseline"]
+              formatter={(value: number | undefined, name: string | undefined) => {
+                if (value === undefined) {
+                  const label = name === "value" ? "Current" : name === "baseline" ? "Baseline" : "Value"
+                  return ["N/A", label]
+                }
                 if (name === "value") return [`${value}%`, "Current"]
                 return [`${value}%`, "Baseline"]
               }}
