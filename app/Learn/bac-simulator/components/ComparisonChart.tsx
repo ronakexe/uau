@@ -90,7 +90,10 @@ export function ComparisonChart({ currentBAC }: ComparisonChartProps) {
               domain={[0, "dataMax + 0.02"]}
             />
             <Tooltip
-              formatter={(value: number) => [`${value.toFixed(3)}%`, "BAC"]}
+              formatter={(value: number | undefined) => {
+                if (value === undefined) return ["N/A", "BAC"]
+                return [`${value.toFixed(3)}%`, "BAC"]
+              }}
               labelFormatter={(label) => `Hour ${label}`}
             />
             <Area
@@ -128,7 +131,8 @@ export function ComparisonChart({ currentBAC }: ComparisonChartProps) {
             <XAxis dataKey="metric" />
             <YAxis label={{ value: "Percentage", angle: -90, position: "insideLeft" }} />
             <Tooltip
-              formatter={(value: number, name: string) => {
+              formatter={(value: number | undefined, name: string) => {
+                if (value === undefined) return ["N/A", name === "value" ? "Current" : "Baseline"]
                 if (name === "value") return [`${value}%`, "Current"]
                 return [`${value}%`, "Baseline"]
               }}
