@@ -1,6 +1,6 @@
 "use client"
 
-import { useState, useEffect } from "react"
+import { useEffect, useRef } from "react"
 import { ChevronLeft, ChevronRight } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { ProgressIndicator } from "./ProgressIndicator"
@@ -26,23 +26,47 @@ export function SlideContainer({
   canGoNext,
   canGoPrev,
 }: SlideContainerProps) {
-  const [displaySlide, setDisplaySlide] = useState(currentSlide)
-  const [isVisible, setIsVisible] = useState(true)
+  const prevSlideRef = useRef(currentSlide)
+  const renderCountRef = useRef(0)
+  const slideContentRef = useRef<HTMLDivElement>(null)
 
+  // #region agent log
   useEffect(() => {
-    if (currentSlide !== displaySlide) {
-      // Fade out
-      setIsVisible(false)
-      
-      // After fade out, update slide and fade in
-      const timer = setTimeout(() => {
-        setDisplaySlide(currentSlide)
-        setIsVisible(true)
-      }, 200) // Short fade duration
-
-      return () => clearTimeout(timer)
+    renderCountRef.current += 1
+    fetch('http://127.0.0.1:7242/ingest/938c7e20-ba6b-40b5-a08a-495b85ed855f',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({location:'SlideContainer.tsx:35',message:'SlideContainer render',data:{currentSlide,prevSlide:prevSlideRef.current,renderCount:renderCountRef.current},timestamp:Date.now(),sessionId:'debug-session',runId:'run1',hypothesisId:'A'})}).catch(()=>{});
+    if (currentSlide !== prevSlideRef.current) {
+      fetch('http://127.0.0.1:7242/ingest/938c7e20-ba6b-40b5-a08a-495b85ed855f',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({location:'SlideContainer.tsx:38',message:'Slide changed detected',data:{from:prevSlideRef.current,to:currentSlide},timestamp:Date.now(),sessionId:'debug-session',runId:'run1',hypothesisId:'B'})}).catch(()=>{});
+      prevSlideRef.current = currentSlide
     }
-  }, [currentSlide, displaySlide])
+  }, [currentSlide])
+  // #endregion
+
+  // #region agent log
+  useEffect(() => {
+    const element = slideContentRef.current
+    if (!element) return
+
+    const handleAnimationStart = (e: AnimationEvent) => {
+      fetch('http://127.0.0.1:7242/ingest/938c7e20-ba6b-40b5-a08a-495b85ed855f',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({location:'SlideContainer.tsx:50',message:'CSS animation started',data:{animationName:e.animationName,currentSlide},timestamp:Date.now(),sessionId:'debug-session',runId:'run1',hypothesisId:'C'})}).catch(()=>{});
+    }
+    const handleAnimationEnd = (e: AnimationEvent) => {
+      fetch('http://127.0.0.1:7242/ingest/938c7e20-ba6b-40b5-a08a-495b85ed855f',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({location:'SlideContainer.tsx:53',message:'CSS animation ended',data:{animationName:e.animationName,currentSlide},timestamp:Date.now(),sessionId:'debug-session',runId:'run1',hypothesisId:'D'})}).catch(()=>{});
+    }
+    const handleTransitionStart = (e: TransitionEvent) => {
+      fetch('http://127.0.0.1:7242/ingest/938c7e20-ba6b-40b5-a08a-495b85ed855f',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({location:'SlideContainer.tsx:56',message:'CSS transition started',data:{propertyName:e.propertyName,currentSlide},timestamp:Date.now(),sessionId:'debug-session',runId:'run1',hypothesisId:'E'})}).catch(()=>{});
+    }
+
+    element.addEventListener('animationstart', handleAnimationStart)
+    element.addEventListener('animationend', handleAnimationEnd)
+    element.addEventListener('transitionstart', handleTransitionStart)
+
+    return () => {
+      element.removeEventListener('animationstart', handleAnimationStart)
+      element.removeEventListener('animationend', handleAnimationEnd)
+      element.removeEventListener('transitionstart', handleTransitionStart)
+    }
+  }, [currentSlide])
+  // #endregion
 
   return (
     <div className="relative min-h-screen w-full">
@@ -83,10 +107,11 @@ export function SlideContainer({
         </Button>
       </div>
 
-      {/* Slide Content */}
+      {/* Slide Content - Use key for React updates, but transitions won't retrigger */}
       <div
-        key={displaySlide}
-        className={`w-full transition-opacity duration-300 ${isVisible ? "opacity-100" : "opacity-0"}`}
+        ref={slideContentRef}
+        key={currentSlide}
+        className="w-full opacity-100 transition-opacity duration-200 ease-in-out"
         role="region"
         aria-label={`Slide ${currentSlide + 1} of ${totalSlides}`}
         aria-live="polite"

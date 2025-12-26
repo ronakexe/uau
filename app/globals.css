@@ -140,19 +140,29 @@
   }
 
   .animate-fade-in-up {
-    animation: fadeInUp 0.5s ease-out forwards;
+    animation: fadeInUp 0.5s ease-out;
+    animation-fill-mode: both;
   }
 
   .animate-fade-in {
-    animation: fadeIn 0.5s ease-out forwards;
+    animation: fadeIn 0.5s ease-out;
+    animation-fill-mode: both;
   }
 
   .animate-scale-in {
-    animation: scaleIn 0.3s ease-out forwards;
+    animation: scaleIn 0.3s ease-out;
+    animation-fill-mode: both;
   }
 
   .animate-pulse-custom {
     animation: pulse 2s ease-in-out infinite;
+  }
+  
+  /* Prevent animation retrigger on remount */
+  .animate-fade-in-up,
+  .animate-fade-in,
+  .animate-scale-in {
+    animation-iteration-count: 1;
   }
 }
 

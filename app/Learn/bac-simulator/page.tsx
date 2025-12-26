@@ -1,6 +1,6 @@
 "use client"
 
-import { Suspense } from "react"
+import { Suspense, useEffect } from "react"
 import { SlideContainer } from "./components/SlideContainer"
 import { BACProvider } from "./context/BACContext"
 import { Slide0_Title } from "./slides/Slide0_Title"
@@ -42,6 +42,12 @@ function SlideshowContent() {
   ]
 
   const CurrentSlide = slides[currentSlide]
+
+  // #region agent log
+  useEffect(() => {
+    fetch('http://127.0.0.1:7242/ingest/938c7e20-ba6b-40b5-a08a-495b85ed855f',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({location:'page.tsx:44',message:'SlideshowContent render',data:{currentSlide,slideComponent:CurrentSlide.name},timestamp:Date.now(),sessionId:'debug-session',runId:'run1',hypothesisId:'F'})}).catch(()=>{});
+  }, [currentSlide, CurrentSlide])
+  // #endregion
 
   return (
     <SlideContainer

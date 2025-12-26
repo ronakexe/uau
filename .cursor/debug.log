@@ -1,0 +1,30 @@
+{"location":"SlideContainer.tsx:35","message":"SlideContainer render","data":{"currentSlide":0,"prevSlide":0,"renderCount":1},"timestamp":1766772307833,"sessionId":"debug-session","runId":"run1","hypothesisId":"A"}
+{"location":"SlideContainer.tsx:35","message":"SlideContainer render","data":{"currentSlide":2,"prevSlide":2,"renderCount":1},"timestamp":1766772307835,"sessionId":"debug-session","runId":"run1","hypothesisId":"A"}
+{"location":"SlideContainer.tsx:35","message":"SlideContainer render","data":{"currentSlide":0,"prevSlide":0,"renderCount":1},"timestamp":1766772312676,"sessionId":"debug-session","runId":"run1","hypothesisId":"A"}
+{"location":"page.tsx:44","message":"SlideshowContent render","data":{"currentSlide":0,"slideComponent":"Slide0_Title"},"timestamp":1766772312677,"sessionId":"debug-session","runId":"run1","hypothesisId":"F"}
+{"location":"SlideContainer.tsx:35","message":"SlideContainer render","data":{"currentSlide":0,"prevSlide":0,"renderCount":1},"timestamp":1766772312687,"sessionId":"debug-session","runId":"run1","hypothesisId":"A"}
+{"location":"page.tsx:44","message":"SlideshowContent render","data":{"currentSlide":0,"slideComponent":"Slide0_Title"},"timestamp":1766772312688,"sessionId":"debug-session","runId":"run1","hypothesisId":"F"}
+{"location":"SlideContainer.tsx:35","message":"SlideContainer render","data":{"currentSlide":2,"prevSlide":0,"renderCount":2},"timestamp":1766772312711,"sessionId":"debug-session","runId":"run1","hypothesisId":"A"}
+{"location":"SlideContainer.tsx:38","message":"Slide changed detected","data":{"from":0,"to":2},"timestamp":1766772312711,"sessionId":"debug-session","runId":"run1","hypothesisId":"B"}
+{"location":"page.tsx:44","message":"SlideshowContent render","data":{"currentSlide":2,"slideComponent":"Slide2_BACBasics"},"timestamp":1766772312711,"sessionId":"debug-session","runId":"run1","hypothesisId":"F"}
+{"location":"SlideContainer.tsx:35","message":"SlideContainer render","data":{"currentSlide":0,"prevSlide":0,"renderCount":1},"timestamp":1766772312962,"sessionId":"debug-session","runId":"run1","hypothesisId":"A"}
+{"location":"page.tsx:44","message":"SlideshowContent render","data":{"currentSlide":0,"slideComponent":"Slide0_Title"},"timestamp":1766772312962,"sessionId":"debug-session","runId":"run1","hypothesisId":"F"}
+{"location":"SlideContainer.tsx:35","message":"SlideContainer render","data":{"currentSlide":0,"prevSlide":0,"renderCount":1},"timestamp":1766772313017,"sessionId":"debug-session","runId":"run1","hypothesisId":"A"}
+{"location":"page.tsx:44","message":"SlideshowContent render","data":{"currentSlide":0,"slideComponent":"Slide0_Title"},"timestamp":1766772313018,"sessionId":"debug-session","runId":"run1","hypothesisId":"F"}
+{"location":"SlideContainer.tsx:35","message":"SlideContainer render","data":{"currentSlide":2,"prevSlide":0,"renderCount":2},"timestamp":1766772313023,"sessionId":"debug-session","runId":"run1","hypothesisId":"A"}
+{"location":"SlideContainer.tsx:38","message":"Slide changed detected","data":{"from":0,"to":2},"timestamp":1766772313023,"sessionId":"debug-session","runId":"run1","hypothesisId":"B"}
+{"location":"page.tsx:44","message":"SlideshowContent render","data":{"currentSlide":2,"slideComponent":"Slide2_BACBasics"},"timestamp":1766772313023,"sessionId":"debug-session","runId":"run1","hypothesisId":"F"}
+{"location":"Slide0_Title.tsx:9","message":"Slide0_Title mounted","data":{},"timestamp":1766772319201,"sessionId":"debug-session","runId":"run1","hypothesisId":"G"}
+{"location":"Slide0_Title.tsx:9","message":"Slide0_Title mounted","data":{},"timestamp":1766772354245,"sessionId":"debug-session","runId":"run1","hypothesisId":"G"}
+{"location":"SlideContainer.tsx:35","message":"SlideContainer render","data":{"currentSlide":0,"prevSlide":0,"renderCount":1},"timestamp":1766772354245,"sessionId":"debug-session","runId":"run1","hypothesisId":"A"}
+{"location":"page.tsx:44","message":"SlideshowContent render","data":{"currentSlide":0,"slideComponent":"Slide0_Title"},"timestamp":1766772354245,"sessionId":"debug-session","runId":"run1","hypothesisId":"F"}
+{"location":"Slide0_Title.tsx:12","message":"Slide0_Title unmounted","data":{},"timestamp":1766772355150,"sessionId":"debug-session","runId":"run1","hypothesisId":"H"}
+{"location":"SlideContainer.tsx:35","message":"SlideContainer render","data":{"currentSlide":1,"prevSlide":0,"renderCount":2},"timestamp":1766772355150,"sessionId":"debug-session","runId":"run1","hypothesisId":"A"}
+{"location":"SlideContainer.tsx:38","message":"Slide changed detected","data":{"from":0,"to":1},"timestamp":1766772355150,"sessionId":"debug-session","runId":"run1","hypothesisId":"B"}
+{"location":"page.tsx:44","message":"SlideshowContent render","data":{"currentSlide":1,"slideComponent":"Slide1_Education"},"timestamp":1766772355150,"sessionId":"debug-session","runId":"run1","hypothesisId":"F"}
+{"location":"SlideContainer.tsx:35","message":"SlideContainer render","data":{"currentSlide":2,"prevSlide":1,"renderCount":3},"timestamp":1766772364762,"sessionId":"debug-session","runId":"run1","hypothesisId":"A"}
+{"location":"SlideContainer.tsx:38","message":"Slide changed detected","data":{"from":1,"to":2},"timestamp":1766772364762,"sessionId":"debug-session","runId":"run1","hypothesisId":"B"}
+{"location":"page.tsx:44","message":"SlideshowContent render","data":{"currentSlide":2,"slideComponent":"Slide2_BACBasics"},"timestamp":1766772364762,"sessionId":"debug-session","runId":"run1","hypothesisId":"F"}
+{"location":"SlideContainer.tsx:35","message":"SlideContainer render","data":{"currentSlide":1,"prevSlide":2,"renderCount":4},"timestamp":1766772366238,"sessionId":"debug-session","runId":"run1","hypothesisId":"A"}
+{"location":"SlideContainer.tsx:38","message":"Slide changed detected","data":{"from":2,"to":1},"timestamp":1766772366238,"sessionId":"debug-session","runId":"run1","hypothesisId":"B"}
+{"location":"page.tsx:44","message":"SlideshowContent render","data":{"currentSlide":1,"slideComponent":"Slide1_Education"},"timestamp":1766772366238,"sessionId":"debug-session","runId":"run1","hypothesisId":"F"}
