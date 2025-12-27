@@ -1,7 +1,7 @@
 import { useState, useEffect, useCallback } from "react"
 import { useSearchParams, useRouter } from "next/navigation"
 
-const TOTAL_SLIDES = 11 // Slides 0-10
+const TOTAL_SLIDES = 9 // Slides 0-8
 
 /**
  * Hook for managing slide navigation state

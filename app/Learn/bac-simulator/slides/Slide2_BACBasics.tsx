@@ -1,22 +1,4 @@
-"use client"
-
-import { useState } from "react"
-
 export function Slide2_BACBasics() {
-  const [demoWeight, setDemoWeight] = useState(150)
-  const [demoGender, setDemoGender] = useState<"male" | "female">("male")
-  const [demoDrinks, setDemoDrinks] = useState(3)
-
-  // Simplified BAC calculation for demo
-  const calculateDemoBAC = () => {
-    const weightGrams = demoWeight * 453.592
-    const rValue = demoGender === "male" ? 0.68 : 0.55
-    const ethanolGrams = demoDrinks * 14
-    return ((ethanolGrams / (weightGrams * rValue)) * 100).toFixed(3)
-  }
-
-  const demoBAC = parseFloat(calculateDemoBAC())
-
   return (
     <div className="container mx-auto min-h-screen px-4 py-20">
       <div className="mx-auto max-w-4xl">
@@ -38,57 +20,32 @@ export function Slide2_BACBasics() {
           </div>
         </div>
 
-        {/* Interactive Demo */}
+        {/* Formula Components Explanation */}
         <div className="mb-8 rounded-lg border bg-card p-6">
-          <h2 className="mb-4 text-2xl font-semibold">Try It Yourself</h2>
-          <div className="grid gap-4 md:grid-cols-3">
+          <h2 className="mb-4 text-2xl font-semibold">Understanding the Components</h2>
+          <div className="space-y-4">
             <div>
-              <label className="mb-2 block text-sm font-medium">Weight (lbs)</label>
-              <input
-                type="number"
-                value={demoWeight}
-                onChange={(e) => setDemoWeight(parseFloat(e.target.value) || 150)}
-                className="w-full rounded border px-3 py-2"
-                min="80"
-                max="500"
-              />
+              <h3 className="mb-2 text-lg font-semibold">Alcohol in grams</h3>
+              <p className="text-muted-foreground">
+                The total amount of pure ethanol consumed. One standard drink contains approximately
+                14 grams of pure alcohol.
+              </p>
             </div>
             <div>
-              <label className="mb-2 block text-sm font-medium">Gender</label>
-              <div className="flex gap-2">
-                <button
-                  onClick={() => setDemoGender("male")}
-                  className={`flex-1 rounded px-3 py-2 ${
-                    demoGender === "male" ? "bg-primary text-primary-foreground" : "bg-muted"
-                  }`}
-                >
-                  Male
-                </button>
-                <button
-                  onClick={() => setDemoGender("female")}
-                  className={`flex-1 rounded px-3 py-2 ${
-                    demoGender === "female" ? "bg-primary text-primary-foreground" : "bg-muted"
-                  }`}
-                >
-                  Female
-                </button>
-              </div>
+              <h3 className="mb-2 text-lg font-semibold">Weight in grams</h3>
+              <p className="text-muted-foreground">
+                Your body weight converted to grams. This represents the total volume of body water
+                available to distribute alcohol.
+              </p>
             </div>
             <div>
-              <label className="mb-2 block text-sm font-medium">Drinks</label>
-              <input
-                type="number"
-                value={demoDrinks}
-                onChange={(e) => setDemoDrinks(parseInt(e.target.value) || 0)}
-                className="w-full rounded border px-3 py-2"
-                min="0"
-                max="30"
-              />
+              <h3 className="mb-2 text-lg font-semibold">Water distribution coefficient (r)</h3>
+              <p className="text-muted-foreground">
+                A factor that accounts for the percentage of body weight that is water. This value
+                differs between males (0.68) and females (0.55) due to biological differences in
+                body composition, including muscle mass and fat distribution.
+              </p>
             </div>
-          </div>
-          <div className="mt-4 rounded bg-muted/50 p-4 text-center">
-            <p className="text-sm text-muted-foreground">Estimated Peak BAC</p>
-            <p className="text-3xl font-bold">{demoBAC}%</p>
           </div>
         </div>
 

@@ -6,10 +6,8 @@ import { BACProvider } from "./context/BACContext"
 import { Slide0_Title } from "./slides/Slide0_Title"
 import { Slide1_Education } from "./slides/Slide1_Education"
 import { Slide2_BACBasics } from "./slides/Slide2_BACBasics"
-import { Slide3_CalculatorIntro } from "./slides/Slide3_CalculatorIntro"
 import { Slide4_InteractiveCalc } from "./slides/Slide4_InteractiveCalc"
 import { Slide5_ReactionTime } from "./slides/Slide5_ReactionTime"
-import { Slide6_Vision } from "./slides/Slide6_Vision"
 import { Slide7_Decision } from "./slides/Slide7_Decision"
 import { Slide8_LegalLimits } from "./slides/Slide8_LegalLimits"
 import { Slide9_Summary } from "./slides/Slide9_Summary"
@@ -31,10 +29,8 @@ function SlideshowContent() {
     Slide0_Title,
     Slide1_Education,
     Slide2_BACBasics,
-    Slide3_CalculatorIntro,
     Slide4_InteractiveCalc,
     Slide5_ReactionTime,
-    Slide6_Vision,
     Slide7_Decision,
     Slide8_LegalLimits,
     Slide9_Summary,

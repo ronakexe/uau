@@ -1,6 +1,6 @@
 "use client"
 
-import { useState, useCallback } from "react"
+import { useState, useCallback, useEffect, useRef } from "react"
 import { Button } from "@/components/ui/button"
 import { useImpairmentEffects } from "../hooks/useImpairmentEffects"
 
@@ -11,8 +11,10 @@ interface ReactionTimeVisualProps {
 export function ReactionTimeVisual({ bac }: ReactionTimeVisualProps) {
   const [baselineTimes, setBaselineTimes] = useState<number[]>([])
   const [currentTestStart, setCurrentTestStart] = useState<number | null>(null)
-  const [showTarget, setShowTarget] = useState(false)
-  const [testPhase, setTestPhase] = useState<"baseline" | "impaired" | "complete">("baseline")
+  const [dotColor, setDotColor] = useState<"red" | "blue" | null>(null)
+  const [testPhase, setTestPhase] = useState<"idle" | "running" | "complete">("idle")
+  const [currentTrial, setCurrentTrial] = useState(0)
+  const timeoutRef = useRef<NodeJS.Timeout | null>(null)
   const { getImpairedReactionTimeMs } = useImpairmentEffects(bac)
 
   const averageBaseline = baselineTimes.length > 0
@@ -23,43 +25,86 @@ export function ReactionTimeVisual({ bac }: ReactionTimeVisualProps) {
   const timeDifference = impairedTime - averageBaseline
   const percentIncrease = averageBaseline > 0 ? (timeDifference / averageBaseline) * 100 : 0
 
-  const startTest = useCallback(() => {
-    if (testPhase === "baseline" && baselineTimes.length >= 3) {
-      setTestPhase("impaired")
-      return
+  // Cleanup timeout on unmount
+  useEffect(() => {
+    return () => {
+      if (timeoutRef.current) {
+        clearTimeout(timeoutRef.current)
+      }
     }
-    if (testPhase === "impaired") {
+  }, [])
+
+  const startNextTrial = useCallback((trialNumber: number) => {
+    if (trialNumber > 3) {
       setTestPhase("complete")
+      setDotColor(null)
       return
     }
 
-    // Random delay before showing target (1-3 seconds)
-    const delay = Math.random() * 2000 + 1000
+    // Show red dot immediately
+    setDotColor("red")
     setCurrentTestStart(null)
-    setShowTarget(false)
 
-    setTimeout(() => {
+    // Random delay before changing to blue (1-3 seconds)
+    const delay = Math.random() * 2000 + 1000
+    
+    timeoutRef.current = setTimeout(() => {
       setCurrentTestStart(Date.now())
-      setShowTarget(true)
+      setDotColor("blue")
     }, delay)
-  }, [testPhase, baselineTimes.length])
+  }, [])
+
+  const startTest = useCallback(() => {
+    setTestPhase("running")
+    setCurrentTrial(1)
+    setBaselineTimes([])
+    startNextTrial(1)
+  }, [startNextTrial])
 
   const handleTargetClick = useCallback(() => {
-    if (!currentTestStart || !showTarget) return
+    if (!currentTestStart || dotColor !== "blue" || testPhase !== "running") return
+
+    // Clear any pending timeout
+    if (timeoutRef.current) {
+      clearTimeout(timeoutRef.current)
+      timeoutRef.current = null
+    }
 
     const reactionTime = Date.now() - currentTestStart
-    setShowTarget(false)
-
-    if (testPhase === "baseline") {
-      setBaselineTimes((prev) => [...prev, reactionTime])
-    }
-  }, [currentTestStart, showTarget, testPhase])
+    setBaselineTimes((prev) => {
+      const newTimes = [...prev, reactionTime]
+      
+      // Start next trial after a brief pause (if not done)
+      if (newTimes.length < 3) {
+        setTimeout(() => {
+          const nextTrial = newTimes.length + 1
+          setCurrentTrial(nextTrial)
+          startNextTrial(nextTrial)
+        }, 500)
+      } else {
+        // All 3 trials complete
+        setTimeout(() => {
+          setTestPhase("complete")
+          setDotColor(null)
+        }, 500)
+      }
+      
+      return newTimes
+    })
+    setDotColor(null)
+    setCurrentTestStart(null)
+  }, [currentTestStart, dotColor, testPhase, startNextTrial])
 
   const resetTest = useCallback(() => {
+    if (timeoutRef.current) {
+      clearTimeout(timeoutRef.current)
+      timeoutRef.current = null
+    }
     setBaselineTimes([])
-    setTestPhase("baseline")
-    setShowTarget(false)
+    setTestPhase("idle")
+    setDotColor(null)
     setCurrentTestStart(null)
+    setCurrentTrial(0)
   }, [])
 
   // Calculate stopping distance at 60 mph
@@ -73,39 +118,51 @@ export function ReactionTimeVisual({ bac }: ReactionTimeVisualProps) {
       <div className="text-center">
         <h3 className="text-2xl font-bold">Reaction Time Test</h3>
         <p className="text-muted-foreground">
-          {testPhase === "baseline"
-            ? "Click the button below, then click the red target as fast as possible when it appears (3 trials)"
-            : testPhase === "impaired"
-            ? "Now test with simulated impairment based on your BAC"
+          {testPhase === "idle"
+            ? "Click 'Start Test' to begin. A red dot will appear, then change to blue. Click the blue dot as fast as possible. You'll complete 3 trials automatically."
+            : testPhase === "running"
+            ? "Click the blue dot as fast as possible when it appears!"
             : "Test complete! Compare your results below."}
         </p>
       </div>
 
       {/* Test Area */}
-      <div className="relative flex min-h-[300px] items-center justify-center rounded-lg border bg-muted/20">
-        {showTarget && (
-          <button
-            onClick={handleTargetClick}
-            className="h-24 w-24 rounded-full bg-red-500 shadow-lg transition-all hover:scale-110"
-            aria-label="Click target as fast as possible"
-          />
+      <div className="flex gap-6">
+        {/* Trial Counter */}
+        {testPhase === "running" && (
+          <div className="flex shrink-0 flex-col items-center justify-center rounded-lg border bg-card p-4">
+            <p className="text-sm text-muted-foreground">Trial</p>
+            <p className="text-3xl font-bold">
+              {currentTrial}/3
+            </p>
+          </div>
         )}
 
-        {!showTarget && testPhase !== "complete" && (
-          <Button onClick={startTest} size="lg">
-            {testPhase === "baseline"
-              ? baselineTimes.length === 0
-                ? "Start Baseline Test"
-                : `Trial ${baselineTimes.length + 1} of 3`
-              : "Start Impaired Test"}
-          </Button>
-        )}
+        {/* Test Area */}
+        <div className="relative flex flex-1 min-h-[300px] items-center justify-center rounded-lg border bg-muted/20">
+          {dotColor && (
+            <button
+              onClick={handleTargetClick}
+              className={`h-24 w-24 rounded-full shadow-lg transition-all hover:scale-110 ${
+                dotColor === "red" ? "bg-red-500" : "bg-blue-500"
+              }`}
+              aria-label={dotColor === "blue" ? "Click target as fast as possible" : "Wait for blue dot"}
+              disabled={dotColor === "red"}
+            />
+          )}
+
+          {testPhase === "idle" && (
+            <Button onClick={startTest} size="lg">
+              Start Test
+            </Button>
+          )}
+        </div>
       </div>
 
       {/* Results */}
-      {testPhase === "baseline" && baselineTimes.length > 0 && (
+      {testPhase === "running" && baselineTimes.length > 0 && (
         <div className="rounded-lg border bg-card p-4">
-          <h4 className="font-semibold">Baseline Results</h4>
+          <h4 className="font-semibold">Current Results</h4>
           <div className="mt-2 space-y-1 text-sm">
             {baselineTimes.map((time, i) => (
               <div key={i}>Trial {i + 1}: {time}ms</div>
