@@ -25,7 +25,7 @@ export function Slide0_Title() {
             </li>
             <li className="flex items-start gap-3">
               <span className="text-blue-600 font-bold text-xl mt-0.5">2.</span>
-              <span>Click MYTH, FACT, BOTH, or NONE based on what you believe</span>
+              <span>Click MYTH or FACT based on what you believe</span>
             </li>
             <li className="flex items-start gap-3">
               <span className="text-blue-600 font-bold text-xl mt-0.5">3.</span>

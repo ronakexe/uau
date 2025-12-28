@@ -14,12 +14,10 @@ export function VoteButtons({ onVote, disabled = false, selectedAnswer }: VoteBu
   const buttons: { label: string; value: AnswerType; color: string }[] = [
     { label: "MYTH", value: "myth", color: "bg-red-500 hover:bg-red-600 text-white border-red-600" },
     { label: "FACT", value: "fact", color: "bg-green-500 hover:bg-green-600 text-white border-green-600" },
-    { label: "BOTH", value: "both", color: "bg-orange-500 hover:bg-orange-600 text-white border-orange-600" },
-    { label: "NONE", value: "none", color: "bg-gray-500 hover:bg-gray-600 text-white border-gray-600" },
   ]
 
   return (
-    <div className="grid grid-cols-2 md:grid-cols-4 gap-4 w-full max-w-4xl">
+    <div className="grid grid-cols-2 gap-4 w-full max-w-4xl">
       {buttons.map((button, index) => {
         const isSelected = selectedAnswer === button.value
         return (

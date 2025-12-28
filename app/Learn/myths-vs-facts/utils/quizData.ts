@@ -1,4 +1,4 @@
-export type AnswerType = 'myth' | 'fact' | 'both' | 'none'
+export type AnswerType = 'myth' | 'fact'
 
 export interface MythData {
   id: number

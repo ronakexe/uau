@@ -164,5 +164,12 @@
   .animate-scale-in {
     animation-iteration-count: 1;
   }
+
+  /* Force solid background for mobile menu */
+  .mobile-menu-solid {
+    background-color: #ffffff !important;
+    opacity: 1 !important;
+    backdrop-filter: none !important;
+  }
 }
 
