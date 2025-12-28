@@ -14,9 +14,9 @@ const learnCards = [
   },
   {
     id: 2,
-    title: "Coming Soon",
-    description: "This learning module will be available soon.",
-    locked: true,
+    title: "Myths vs. Facts: Alcohol Awareness",
+    description: "Test your knowledge with 8 counterintuitive alcohol myths. Interactive quiz with scoring and badges.",
+    locked: false,
   },
   {
     id: 3,
@@ -33,6 +33,8 @@ export default function Learn() {
     if (card.locked) return
     if (card.id === 1) {
       router.push("/Learn/bac-simulator")
+    } else if (card.id === 2) {
+      router.push("/Learn/myths-vs-facts")
     }
   }
 

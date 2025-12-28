@@ -1,8 +1,6 @@
 "use client"
 
 import { useEffect, useRef } from "react"
-import { ChevronLeft, ChevronRight } from "lucide-react"
-import { Button } from "@/components/ui/button"
 import { ProgressIndicator } from "./ProgressIndicator"
 
 interface SlideContainerProps {
@@ -78,35 +76,6 @@ export function SlideContainer({
         Skip to main content
       </a>
 
-      {/* Navigation Buttons */}
-      <div className="fixed left-2 top-1/2 z-50 -translate-y-1/2 md:left-4">
-        <Button
-          variant="outline"
-          size="icon"
-          onClick={prevSlide}
-          disabled={!canGoPrev}
-          className="h-12 w-12 rounded-full touch-manipulation"
-          aria-label="Previous slide"
-          aria-disabled={!canGoPrev}
-        >
-          <ChevronLeft className="h-6 w-6" />
-        </Button>
-      </div>
-
-      <div className="fixed right-2 top-1/2 z-50 -translate-y-1/2 md:right-4">
-        <Button
-          variant="outline"
-          size="icon"
-          onClick={nextSlide}
-          disabled={!canGoNext}
-          className="h-12 w-12 rounded-full touch-manipulation"
-          aria-label="Next slide"
-          aria-disabled={!canGoNext}
-        >
-          <ChevronRight className="h-6 w-6" />
-        </Button>
-      </div>
-
       {/* Slide Content - Use key for React updates, but transitions won't retrigger */}
       <div
         ref={slideContentRef}
@@ -119,12 +88,16 @@ export function SlideContainer({
         {children}
       </div>
 
-      {/* Progress Indicator */}
-      <div className="fixed bottom-4 left-1/2 z-50 w-full max-w-2xl -translate-x-1/2 px-4 md:bottom-8">
+      {/* Progress Indicator with Navigation */}
+      <div className="fixed bottom-4 left-1/2 z-50 -translate-x-1/2 px-4 md:bottom-8">
         <ProgressIndicator
           currentSlide={currentSlide}
           totalSlides={totalSlides}
           onSlideClick={goToSlide}
+          prevSlide={prevSlide}
+          nextSlide={nextSlide}
+          canGoPrev={canGoPrev}
+          canGoNext={canGoNext}
         />
       </div>
     </div>
