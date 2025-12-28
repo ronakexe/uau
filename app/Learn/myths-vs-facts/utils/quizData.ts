@@ -47,8 +47,8 @@ export const MYTHS: MythData[] = [
   },
   {
     id: 3,
-    statement: "Drinking water prevents hangovers",
-    correctAnswer: 'myth',
+    statement: "Drinking water doesn't prevent hangover",
+    correctAnswer: 'fact',
     explanation: {
       title: "Hangovers are caused by alcohol's toxins, not fluid loss",
       facts: [
